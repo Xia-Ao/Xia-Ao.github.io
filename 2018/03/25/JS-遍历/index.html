@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript遍历方法对比以及适用对象.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="遍历方法1、for循环语法： 1for\(let i=0; i&amp;amp;lt;length; i++\)&amp;#123; 代码&amp;#125; 说明：因为String对象具有length属性，所以可以直接使用String.length进行遍历 适用对象：Array，String，obj没有length，不可以使用for循环 2、for in语法： 1for( let index in对象)&amp;#123; 在">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript遍历方法对比以及适用对象.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/25/JS-遍历/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="遍历方法1、for循环语法： 1for\(let i=0; i&amp;amp;lt;length; i++\)&amp;#123; 代码&amp;#125; 说明：因为String对象具有length属性，所以可以直接使用String.length进行遍历 适用对象：Array，String，obj没有length，不可以使用for循环 2、for in语法： 1for( let index in对象)&amp;#123; 在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-05T14:49:33.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript遍历方法对比以及适用对象.md">
+<meta name="twitter:description" content="遍历方法1、for循环语法： 1for\(let i=0; i&amp;amp;lt;length; i++\)&amp;#123; 代码&amp;#125; 说明：因为String对象具有length属性，所以可以直接使用String.length进行遍历 适用对象：Array，String，obj没有length，不可以使用for循环 2、for in语法： 1for( let index in对象)&amp;#123; 在">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/25/JS-遍历/" class="article-date">
+  <time datetime="2018-03-25T14:24:40.000Z" itemprop="datePublished">2018-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript遍历方法对比以及适用对象.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="遍历方法"><a href="#遍历方法" class="headerlink" title="遍历方法"></a>遍历方法</h3><h4 id="1、for循环"><a href="#1、for循环" class="headerlink" title="1、for循环"></a>1、for循环</h4><p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>\(<span class="keyword">let</span> i=<span class="number">0</span>; i&amp;lt;length; i++\)&#123; 代码&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：因为String对象具有length属性，所以可以直接使用String.length进行遍历</p>
+<p>适用对象：<strong>Array，String</strong>，obj没有length，不可以使用for循环</p>
+<h4 id="2、for-in"><a href="#2、for-in" class="headerlink" title="2、for in"></a>2、for in</h4><p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">let</span> index <span class="keyword">in</span>对象)&#123; 在此执行代码&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：for in 遍历的是key值</p>
+<p>使用对象：<strong>Array String  Object</strong></p>
+<h4 id="3、for-of"><a href="#3、for-of" class="headerlink" title="3、for of"></a>3、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank" rel="noopener">for of</a></h4><p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> value <span class="keyword">of</span> 对象)&#123; 在此执行代码&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：for of遍历的value值<br>只要具有遍历器接口<strong>Iterator</strong>，都可以使用for of 遍历，比如<strong>NodeList Set Map Array String 类数组</strong></p>
+<p>使用对象：<strong>Array String  </strong></p>
+<h5 id="for-in-与for-of-区别"><a href="#for-in-与for-of-区别" class="headerlink" title="for in 与for of 区别"></a>for in 与for of 区别</h5><ol>
+<li>推荐在循环对象属性的时候，使用<code>for...in</code>,在遍历数组的时候的时候使用<code>for...of</code>。</li>
+<li><code>for...in</code>循环出的是key，<code>for...of</code>循环出的是value</li>
+<li>注意，<code>for...of</code>是ES6新引入的特性。修复了ES5引入的<code>for...in</code>的不足</li>
+<li><code>for...of</code>不能循环普通的对象，需要通过和<code>Object.keys()</code>搭配使用</li>
+</ol>
+<h4 id="4、forEach"><a href="#4、forEach" class="headerlink" title="4、forEach"></a>4、forEach</h4><p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">currentValue, index, arr</span>), <span class="title">thisArg</span>)</span></span><br></pre></td></tr></table></figure>
+<p>说明：arr当前元素所属的数组对象。</p>
+<p>使用对象：<strong>Array</strong> 只有array对象有</p>
+<h4 id="其他数组遍历、map-from-filter-some-every等"><a href="#其他数组遍历、map-from-filter-some-every等" class="headerlink" title="其他数组遍历、map from filter some every等"></a>其他数组遍历、map from filter some every等</h4><p>再加上forEach，这些都是针对于<strong>Array</strong>进行遍历的，</p>
+<h3 id="String遍历"><a href="#String遍历" class="headerlink" title="String遍历"></a>String遍历</h3><p>一种变换的方法，使用split将字符串切割为字符串数组，再对数组进行遍历。</p>
+<h3 id="Object遍历"><a href="#Object遍历" class="headerlink" title="Object遍历"></a>Object遍历</h3><p>除了前面写到的<code>for in</code>遍历Object对象，还有以下几种方法对Object进行遍历</p>
+<h4 id="2、Object-keys"><a href="#2、Object-keys" class="headerlink" title="2、Object.keys"></a>2、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" target="_blank" rel="noopener">Object.keys</a></h4><p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(obj)   <span class="comment">//个表示给定对象的所有可枚举属性的字符串数组。</span></span><br><span class="line"><span class="comment">// 类数组对象</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="number">0</span>: <span class="string">"a"</span>, <span class="number">1</span>: <span class="string">"b"</span>, <span class="number">2</span>: <span class="string">"c"</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(obj).sort()); <span class="comment">// ["0", "1", "2"]</span></span><br></pre></td></tr></table></figure>
+<p>说明：Object.keys返回一个由key值组成的<strong>可枚举属性的字符串数组</strong>，再对数组进行遍历既可以遍历Object</p>
+<h4 id="3、Object-getOwnPropertyNames"><a href="#3、Object-getOwnPropertyNames" class="headerlink" title="3、Object.getOwnPropertyNames"></a>3、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames" target="_blank" rel="noopener">Object.getOwnPropertyNames</a></h4><p>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)  <span class="comment">//在给定对象上找到的属性对应的字符串数组。</span></span><br></pre></td></tr></table></figure>
+<p>说明：返回一个<strong>数组</strong>，该数组对元素是 obj自身拥有的<strong>枚举或不可枚举属性名称字符串</strong></p>
+<h4 id="4、Object-values"><a href="#4、Object-values" class="headerlink" title="4、Object.values()"></a>4、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/values" target="_blank" rel="noopener">Object.values()</a></h4><p>语法：</p>
+<pre><code class="js"><span class="built_in">Object</span>.values(obj)  <span class="comment">//一个包含对象自身的所有可枚举属性值的数组。、</span>
+<span class="comment">//示例  随机键值的类数组对象</span>
+<span class="keyword">var</span> an_obj = { <span class="number">100</span>: <span class="string">'a'</span>, <span class="number">2</span>: <span class="string">'b'</span>, <span class="number">7</span>: <span class="string">'c'</span> };
+<span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(an_obj)); <span class="comment">// ['b', 'c', 'a']</span>
+</code></pre>
+<p>说明：Object.values()返回一个<strong>数组</strong>，其元素是在对象上找到的<strong>可枚举属性值</strong>。属性的顺序与通过手动循环对象的属性值所给出的顺序相同。</p>
+<h4 id="5、Object-entries"><a href="#5、Object-entries" class="headerlink" title="5、Object.entries()"></a>5、Object.entries()</h4><p>语法：</p>
+<pre><code class="js"><span class="built_in">Object</span>.entries(obj)  <span class="comment">//给定对象自身可枚举属性的键值对数组。</span>
+<span class="comment">//示例</span>
+<span class="keyword">const</span> obj = { <span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">baz</span>: <span class="number">42</span> };
+<span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(obj)); <span class="comment">// [ ['foo', 'bar'], ['baz', 42] ]</span>
+</code></pre>
+<p>说明：Object.entries()返回一个数组，其元素是与直接在object上找到的<strong>可枚举属性键值对相对应的数组</strong>。属性的顺序与通过手动循环对象的属性值所给出的顺序相同。</p>
+<p>参考：<a href="https://huixisheng.github.io/object-loop/" target="_blank" rel="noopener">JavaScript如何遍历Object</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/25/JS-遍历/" data-id="cjfmorioi001lr0ji9wvrv4fn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/05/JS-DOM遍历/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DOM遍历.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/25/JS-运算符/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS数据类型、运算符容易踩的几个坑.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

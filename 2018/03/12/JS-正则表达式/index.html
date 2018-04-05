@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>正则表达式.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于正则表达式的匹配，一开始觉得很复杂，主要是因为表达式看不懂，不知道什么是匹配符，限定符，操作符，其实使用过后才发现，正则表达其实是比较简单的，具体的参考下面一篇博文，《JavaScript学习总结（八）正则表达式》里面对于概念的讲解比较详细，正则的使用主要看自己怎么去组合，想要匹配什么样的内容，很多时候，我们要用到的正则匹配，其实网上都有比较全的正则表达式，直接搜索就可以获取到。 充分利用网上">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/12/JS-正则表达式/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="关于正则表达式的匹配，一开始觉得很复杂，主要是因为表达式看不懂，不知道什么是匹配符，限定符，操作符，其实使用过后才发现，正则表达其实是比较简单的，具体的参考下面一篇博文，《JavaScript学习总结（八）正则表达式》里面对于概念的讲解比较详细，正则的使用主要看自己怎么去组合，想要匹配什么样的内容，很多时候，我们要用到的正则匹配，其实网上都有比较全的正则表达式，直接搜索就可以获取到。 充分利用网上">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/import4.png">
+<meta property="og:image" content="http://yoursite.com/assets/import5.png">
+<meta property="og:image" content="http://yoursite.com/assets/import6.png">
+<meta property="og:image" content="http://yoursite.com/assets/2805273310-5427ad34d27ef.gif">
+<meta property="og:updated_time" content="2018-04-05T14:49:33.286Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式.md">
+<meta name="twitter:description" content="关于正则表达式的匹配，一开始觉得很复杂，主要是因为表达式看不懂，不知道什么是匹配符，限定符，操作符，其实使用过后才发现，正则表达其实是比较简单的，具体的参考下面一篇博文，《JavaScript学习总结（八）正则表达式》里面对于概念的讲解比较详细，正则的使用主要看自己怎么去组合，想要匹配什么样的内容，很多时候，我们要用到的正则匹配，其实网上都有比较全的正则表达式，直接搜索就可以获取到。 充分利用网上">
+<meta name="twitter:image" content="http://yoursite.com/assets/import4.png">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/12/JS-正则表达式/" class="article-date">
+  <time datetime="2018-03-12T12:20:40.000Z" itemprop="datePublished">2018-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于正则表达式的匹配，一开始觉得很复杂，主要是因为表达式看不懂，不知道什么是匹配符，限定符，操作符，其实使用过后才发现，正则表达其实是比较简单的，具体的参考下面一篇博文，《<a href="https://segmentfault.com/a/1190000000699097" target="_blank" rel="noopener">JavaScript学习总结（八）正则表达式</a>》里面对于概念的讲解比较详细，正则的使用主要看自己怎么去组合，想要匹配什么样的内容，很多时候，我们要用到的正则匹配，其实网上都有比较全的正则表达式，直接搜索就可以获取到。</p>
+<p>充分利用网上的资源才是正确学习正则的途径。</p>
+<p>我对于正则的害怕主要是因为记不住正则表达式中特殊字符，MDN有一张表格，很完整很权威，对照这张表格就可以的。要求看到特殊字符就知道是什么意思。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener"><strong>MDN-正则表达式</strong></a></p>
+<p>注意正则有一些字符类匹配，很多时候大家都是使用字符类匹配。这个要记住。</p>
+<p><img src="/assets/import4.png" alt="">重复匹配符也要注意，这个也要记住，一看就能知道表达的匹配范围。</p>
+<p><img src="/assets/import5.png" alt=""><img src="/assets/import6.png" alt="">其他的东西就直接在博文上看就可以了。</p>
+<p>下面有一个导图，记住这个导图你就理解了。<img src="/assets/2805273310-5427ad34d27ef.gif" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/12/JS-正则表达式/" data-id="cjfmoriof001hr0ji6m3eig26" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/13/JS-递归/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          递归.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/12/JS-日期格式化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">日期格式化.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

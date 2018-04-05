@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DOM遍历.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="DOM遍历DOM的遍历分为先序遍历，中序遍历， 后序遍历，是三种不同的顺序的遍历方法 三种方法的区别以及原理请参考： https://www.jianshu.com/p/456af5480cee http://blog.csdn.net/u013468917/article/details/69556547 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右) 中序：考察到">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM遍历.md">
+<meta property="og:url" content="http://yoursite.com/2018/04/05/JS-DOM遍历/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="DOM遍历DOM的遍历分为先序遍历，中序遍历， 后序遍历，是三种不同的顺序的遍历方法 三种方法的区别以及原理请参考： https://www.jianshu.com/p/456af5480cee http://blog.csdn.net/u013468917/article/details/69556547 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右) 中序：考察到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/traversal1.png">
+<meta property="og:image" content="http://yoursite.com/assets/traversal2.png">
+<meta property="og:updated_time" content="2018-04-05T14:47:10.607Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DOM遍历.md">
+<meta name="twitter:description" content="DOM遍历DOM的遍历分为先序遍历，中序遍历， 后序遍历，是三种不同的顺序的遍历方法 三种方法的区别以及原理请参考： https://www.jianshu.com/p/456af5480cee http://blog.csdn.net/u013468917/article/details/69556547 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右) 中序：考察到">
+<meta name="twitter:image" content="http://yoursite.com/assets/traversal1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-DOM遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/05/JS-DOM遍历/" class="article-date">
+  <time datetime="2018-04-04T17:05:40.000Z" itemprop="datePublished">2018-04-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DOM遍历.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="DOM遍历"><a href="#DOM遍历" class="headerlink" title="DOM遍历"></a>DOM遍历</h1><p>DOM的遍历分为先序遍历，中序遍历， 后序遍历，是三种不同的顺序的遍历方法</p>
+<p>三种方法的区别以及原理请参考：</p>
+<p><a href="https://www.jianshu.com/p/456af5480cee" target="_blank" rel="noopener">https://www.jianshu.com/p/456af5480cee</a></p>
+<p><a href="http://blog.csdn.net/u013468917/article/details/69556547" target="_blank" rel="noopener">http://blog.csdn.net/u013468917/article/details/69556547</a></p>
+<p><strong>先序：</strong>考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右)</p>
+<p><strong>中序：</strong>考察到一个节点后，将其暂存，遍历完左子树后，再输出该节点的值，然后遍历右子树。(左根右)</p>
+<p><strong>后序：</strong>考察到一个节点后，将其暂存，遍历完左右子树后，再输出该节点的值。(左右根)</p>
+<p>这里只说一下用来遍历的方法：这篇<a href="http://www.cnblogs.com/tracylin/p/5220867.html" target="_blank" rel="noopener">博文</a>写了五种先序遍历的方法，优先使用DOM中提供的两个专门用来遍历的方法。</p>
+<p>这两个方法在《JavaScript高程》中有详细的介绍：可以参考第12章12.3</p>
+<h2 id="NodeIterator"><a href="#NodeIterator" class="headerlink" title="NodeIterator"></a>NodeIterator</h2><p><img src="/assets/traversal1.png" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用DOM2的"Traversal"模块提供的NodeIterator先序遍历DOM树</span></span><br><span class="line"><span class="comment"> * @param node  根节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">traversalUsingNodeIterator</span>(<span class="params">node</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> iterator = <span class="built_in">document</span>.createNodeIterator(node, NodeFilter.SHOW_ELEMENT,<span class="literal">null</span>,<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">var</span> node = iterator.nextNode();</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(node.tagName);</span><br><span class="line">        node = iterator.nextNode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="TreeWalker"><a href="#TreeWalker" class="headerlink" title="TreeWalker"></a>TreeWalker</h2><p>NodeIterator更高级的一个版本，主要使用的<code>nextNode()</code>方法</p>
+<p><img src="/assets/traversal2.png" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用DOM2的"Traversal"模块提供的TreeWalker先序遍历DOM树</span></span><br><span class="line"><span class="comment"> * @param node  根节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">traversalUsingTreeWalker</span>(<span class="params">node</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> treeWalker = <span class="built_in">document</span>.createTreeWalker(node, NodeFilter.SHOW_ELEMENT,<span class="literal">null</span>,<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">if</span>(node &amp;&amp; node.nodeType === <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(node.tagName);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> node = treeWalker.nextNode();</span><br><span class="line">    <span class="keyword">while</span>(node != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(node.tagName);</span><br><span class="line">        node = treeWalker.nextNode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用DOM扩展的Element-Traversal-API，递归遍历DOM树"><a href="#使用DOM扩展的Element-Traversal-API，递归遍历DOM树" class="headerlink" title="使用DOM扩展的Element Traversal API，递归遍历DOM树"></a>使用DOM扩展的Element Traversal API，递归遍历DOM树</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用DOM扩展的Traversal API提供的新的接口先序遍历DOM树</span></span><br><span class="line"><span class="comment"> * @param node 根节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">traversalUsingTraversalAPI</span>(<span class="params">node</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node &amp;&amp; node.nodeType === <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(node.tagName);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">0</span>,len = node.childElementCount, child = node.firstElementChild;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; len ; i++)&#123;</span><br><span class="line">        traversalUsingTraversalAPI(child);</span><br><span class="line">        child = child.nextElementSibling;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/05/JS-DOM遍历/" data-id="cjfmorimu0008r0jizjm3arnp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/05/JS-data-structure/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据结构之神奇的树.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/25/JS-遍历/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript遍历方法对比以及适用对象.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

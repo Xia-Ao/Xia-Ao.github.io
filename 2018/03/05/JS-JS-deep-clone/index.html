@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS实现深度复制.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JS深复制是在阿里一面的过程中遇到的，以前都不知道，所以当时一脸懵逼，回来赶紧google，发现邹大大以前写过关于深复制的实现，这里参考他的文章：深入剖析 JavaScript 的深复制 浅复制复制的是存在栈内存里面的引用指针，并不是存放在堆内存中的内容，当对一个对象下面的属性值进行修改时，所有的都会变化。 12345678910/** 浅复制 **/let person1 = &amp;#123;">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS实现深度复制.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/JS-JS-deep-clone/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="JS深复制是在阿里一面的过程中遇到的，以前都不知道，所以当时一脸懵逼，回来赶紧google，发现邹大大以前写过关于深复制的实现，这里参考他的文章：深入剖析 JavaScript 的深复制 浅复制复制的是存在栈内存里面的引用指针，并不是存放在堆内存中的内容，当对一个对象下面的属性值进行修改时，所有的都会变化。 12345678910/** 浅复制 **/let person1 = &amp;#123;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-05T14:47:26.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS实现深度复制.md">
+<meta name="twitter:description" content="JS深复制是在阿里一面的过程中遇到的，以前都不知道，所以当时一脸懵逼，回来赶紧google，发现邹大大以前写过关于深复制的实现，这里参考他的文章：深入剖析 JavaScript 的深复制 浅复制复制的是存在栈内存里面的引用指针，并不是存放在堆内存中的内容，当对一个对象下面的属性值进行修改时，所有的都会变化。 12345678910/** 浅复制 **/let person1 = &amp;#123;">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-JS-deep-clone" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/JS-JS-deep-clone/" class="article-date">
+  <time datetime="2018-03-05T04:05:40.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS实现深度复制.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JS深复制是在阿里一面的过程中遇到的，以前都不知道，所以当时一脸懵逼，回来赶紧google，发现邹大大以前写过关于深复制的实现，这里参考他的文章：<a href="http://jerryzou.com/posts/dive-into-deep-clone-in-javascript/" target="_blank" rel="noopener">深入剖析 JavaScript 的深复制</a></p>
+<h3 id="浅复制"><a href="#浅复制" class="headerlink" title="浅复制"></a>浅复制</h3><p>复制的是存在栈内存里面的引用指针，并不是存放在堆内存中的内容，当对一个对象下面的属性值进行修改时，所有的都会变化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 浅复制 **/</span></span><br><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Jack'</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> person2 = person1;</span><br><span class="line">person2.name = <span class="string">"Kai"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name);  <span class="comment">//'Kai'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);  <span class="comment">//'Kai'</span></span><br></pre></td></tr></table></figure>
+<h3 id="深复制"><a href="#深复制" class="headerlink" title="深复制"></a>深复制</h3><p>深复制想实现把对象里面属性值也给复制，当修改复制后的对象某个属性值时，原对象对应的属性值不会被修改。</p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>JSON的全局对象<code>parse</code>和<code>stringify</code>方法。</li>
+<li>jQuery的<code>$.clone()</code> 和 <code>$.extend()</code>方法。</li>
+<li>Underscored的<code>_.clone()</code></li>
+<li>lodash的<code>_.clone()</code> / <code>_.cloneDeep()</code></li>
+<li>邹润阳建议的拥抱未来的深复制方法，直接定义在prototype上面。</li>
+</ol>
+<h4 id="JSON的全局对象parse和stringify方法。"><a href="#JSON的全局对象parse和stringify方法。" class="headerlink" title="JSON的全局对象parse和stringify方法。"></a>JSON的全局对象<code>parse</code>和<code>stringify</code>方法。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">source</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(source));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 深复制 **/</span></span><br><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Jack'</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(person1));</span><br><span class="line">person2.name = <span class="string">"Kai"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name);  <span class="comment">//'Jack'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);  <span class="comment">//'Kai'</span></span><br></pre></td></tr></table></figure>
+<p>上面这种方法好处是非常简单易用,，对于Number, String,Obejct等来说基本实现。但是坏处也显而易见,对于正则表达式类型、函数类型等无法进行深拷贝(而且会直接丢失相应的值)。还有一点不好的地方是它会抛弃对象的constructor，也就是深复制之后，无论这个对象原本的构造函数是什么，在深复制之后都会变成Object。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 深复制 **/</span></span><br><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Jack'</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">29</span>,</span><br><span class="line">    <span class="string">'fn'</span>:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'fn'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'reg'</span>:<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'e'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(person1));</span><br><span class="line">person2.name = <span class="string">"Kai"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name);  <span class="comment">//'Jack'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);  <span class="comment">//'Kai'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.fn);    <span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.reg);   <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
+<h4 id="jQuery-Underscored-lodash第三方插件实现"><a href="#jQuery-Underscored-lodash第三方插件实现" class="headerlink" title="jQuery Underscored lodash第三方插件实现"></a>jQuery Underscored lodash第三方插件实现</h4><p>现在不做介绍，以后用的的时候再补充进来</p>
+<h4 id="邹润阳–拥抱未来的深复制方法"><a href="#邹润阳–拥抱未来的深复制方法" class="headerlink" title="邹润阳–拥抱未来的深复制方法"></a>邹润阳–拥抱未来的深复制方法</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/05/JS-JS-deep-clone/" data-id="cjfmorimw000ar0ji787fzqbq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/05/JS-JS引擎/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS引擎-以V8为例.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/05/JS-Javascript编程风格/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Javascript编程风格.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

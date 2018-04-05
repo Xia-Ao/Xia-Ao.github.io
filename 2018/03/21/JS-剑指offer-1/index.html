@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>剑指Offer-JavaScript版-part1.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="指offer实战-JavaScript版前言：以前刚学JS的时候，一直觉得前端不怎么需要算法，就是单纯的实现业务功能，现在想想那时候的想法多少天真，可以说用幼稚来形容了。作为一个合格的程序猿，怎么可能不搞算法，前端的算法不会太复杂，一般都是一些比较简单的算法，对照剑指offer，将里面的算法重新实战一遍，代码位置在另一个仓库Offer 1、二维数组中的查找题目：在一个二维数组中，每一行都按照从左到">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指Offer-JavaScript版-part1.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/JS-剑指offer-1/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="指offer实战-JavaScript版前言：以前刚学JS的时候，一直觉得前端不怎么需要算法，就是单纯的实现业务功能，现在想想那时候的想法多少天真，可以说用幼稚来形容了。作为一个合格的程序猿，怎么可能不搞算法，前端的算法不会太复杂，一般都是一些比较简单的算法，对照剑指offer，将里面的算法重新实战一遍，代码位置在另一个仓库Offer 1、二维数组中的查找题目：在一个二维数组中，每一行都按照从左到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-05T14:49:33.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指Offer-JavaScript版-part1.md">
+<meta name="twitter:description" content="指offer实战-JavaScript版前言：以前刚学JS的时候，一直觉得前端不怎么需要算法，就是单纯的实现业务功能，现在想想那时候的想法多少天真，可以说用幼稚来形容了。作为一个合格的程序猿，怎么可能不搞算法，前端的算法不会太复杂，一般都是一些比较简单的算法，对照剑指offer，将里面的算法重新实战一遍，代码位置在另一个仓库Offer 1、二维数组中的查找题目：在一个二维数组中，每一行都按照从左到">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-剑指offer-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/21/JS-剑指offer-1/" class="article-date">
+  <time datetime="2018-03-21T12:15:40.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      剑指Offer-JavaScript版-part1.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="指offer实战-JavaScript版"><a href="#指offer实战-JavaScript版" class="headerlink" title="指offer实战-JavaScript版"></a>指offer实战-JavaScript版</h3><p>前言：以前刚学JS的时候，一直觉得前端不怎么需要算法，就是单纯的实现业务功能，现在想想那时候的想法多少天真，可以说用幼稚来形容了。作为一个合格的程序猿，怎么可能不搞算法，前端的算法不会太复杂，一般都是一些比较简单的算法，对照剑指offer，将里面的算法重新实战一遍，代码位置在另一个仓库<a href="https://github.com/Xia-Ao/Offer" target="_blank" rel="noopener">Offer</a></p>
+<h3 id="1、二维数组中的查找"><a href="#1、二维数组中的查找" class="headerlink" title="1、二维数组中的查找"></a>1、二维数组中的查找</h3><p><strong>题目</strong>：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<p><strong>思路</strong>：二维数组是有规律的，按照横纵展开，向右向下递增。选取数组右上角的数字，如果该数字等于要查找的数组，则结束。如果大于要查找的数字，则该列都大于要查找的数字，剔除该列，向左移动一列继续查找；如果小于要查找的数字，则该行都小于要查找的数字，剔除该行，向下移动一行继续查找；直到查找到该数字或者查找到左下角还没有匹配，则返回没有匹配。</p>
+<p><strong>代码</strong>：<a href="https://github.com/Xia-Ao/Offer/tree/master/offer" target="_blank" rel="noopener">github</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">array, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> row = array.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = row, j = <span class="number">0</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &lt; array[i].length;) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target === array[i][j]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &gt; array[i][j]) &#123; <span class="comment">//目标大于，则下移一行</span></span><br><span class="line">            j++;  <span class="comment">//向下移动一行</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i--;  <span class="comment">//向左一动一行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2、替换空格"><a href="#2、替换空格" class="headerlink" title="2、替换空格"></a>2、替换空格</h3><p><strong>题目</strong>：请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。</p>
+<p><strong>思路</strong>：当然是直接用正则匹配然后使用replace替换就好了。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replaceSpace</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/\s/g</span>);</span><br><span class="line">    <span class="keyword">return</span> str.replace(reg, <span class="string">'--'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3、从尾到头打印链表"><a href="#3、从尾到头打印链表" class="headerlink" title="3、从尾到头打印链表"></a>3、从尾到头打印链表</h3><p><strong>题目</strong>：输入一个链表，从尾到头打印链表每个节点的值。</p>
+<p>不懂链表的可以参考《学习JavaScript的数据结构与算法》</p>
+<p><strong>思路</strong>：先将链表每个结点的值存入数组中，然后通过数组的reverse方法，即可从尾到头打印</p>
+<p>代码：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printLinkedList</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [];</span><br><span class="line">    <span class="keyword">while</span> (head !== <span class="literal">null</span>) &#123;</span><br><span class="line">        arr.push(head);</span><br><span class="line">        head = head.next();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr.reverse();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4、重建二叉树"><a href="#4、重建二叉树" class="headerlink" title="4、重建二叉树"></a>4、重建二叉树</h3><p><strong>题目</strong>：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+<hr>
+<h3 id="5、用两个栈来实现一个队列"><a href="#5、用两个栈来实现一个队列" class="headerlink" title="5、用两个栈来实现一个队列"></a>5、用两个栈来实现一个队列</h3><p><strong>题目</strong>：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型</p>
+<p><strong>思路</strong>：栈的操作是后入先出（LIFO），队列的操作是先入先出（FIFO）</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = [], arr2 = [], result = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    arr2.push(head);</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shift</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (arr1.length) &#123;</span><br><span class="line">        arr1.shift()</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr2.length) &#123;</span><br><span class="line">        arr2.shift()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="6、旋转数组的最小数字"><a href="#6、旋转数组的最小数字" class="headerlink" title="6、旋转数组的最小数字"></a>6、旋转数组的最小数字</h3><p><strong>题目</strong>：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。</p>
+<p><strong>思路</strong>：其实剑指Offer中想要表达的是一种寻找数组最小值的二分查找方法，旋转之后原数组分为两个部分，[3,4,5,1,2],前面的部分最小的数肯定大于或等于后面部分最大的数，通过这一点可以节省遍历，典型的二分法。</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotate</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arr.sort(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a &lt; b)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//        return Math.min.apply(arr, arr);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="7、斐波那契数列"><a href="#7、斐波那契数列" class="headerlink" title="7、斐波那契数列"></a>7、斐波那契数列</h3><p><strong>题目</strong>：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。<code>n&lt;=39</code></p>
+<p><strong>思路</strong>：传统思路是使用递归，这种方法简单直接，但是会有一个问题，存在严重的效率问题，很多的重复计算，因此，剑指Offer提出一种优化方法，使用内存记录之前的计算结果，从0 ，1 ，2 开始一直到n，计算过的值被记录下来，就不用再计算了。大大的节省了时间。</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibonacci</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n === <span class="number">0</span> || n === <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> one = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">var</span> two = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">                result = one + two;</span><br><span class="line">                one = two;</span><br><span class="line">                two = result</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="8、跳台阶"><a href="#8、跳台阶" class="headerlink" title="8、跳台阶"></a>8、跳台阶</h3><p><strong>题目</strong>：一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<p><strong>思路</strong>：其实就是斐波那契函数的应用，如果n=1则只有一种，如果n=2则有两种,如果n=3，则有前两种之和，记一个函数f(n),则跳法为f(n-1)+f(n-2)</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibonacci</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> one = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">var</span> two = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">                result = one + two;</span><br><span class="line">                one = two;</span><br><span class="line">                two = result</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="9、变态跳台阶"><a href="#9、变态跳台阶" class="headerlink" title="9、变态跳台阶"></a>9、变态跳台阶</h3><p><strong>题目</strong>：一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<p><strong>思路</strong>：其实就是斐波那契函数的应用，如果n=1则只有一种，如果n=2则有两种,如果n=3，则有前两种之和在加上自己跳n阶的一种，记一个函数f(n),则跳法为f(n-1)+f(n-2)+…+f(1)+1</p>
+<p><strong>代码</strong>：Github<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibonacci</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> arr[n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            result = <span class="number">1</span> + arr.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, currentValue</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> total + currentValue;</span><br><span class="line">            &#125;);</span><br><span class="line">            arr.push(result);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="10、矩形覆盖"><a href="#10、矩形覆盖" class="headerlink" title="10、矩形覆盖"></a>10、矩形覆盖</h3><p><strong>题目</strong>：我们可以用2<em>1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2</em>1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？</p>
+<p><strong>思路</strong>：其实就是斐波那契函数的应用，注意题目中是无重叠，如果n=1则只有一种，n=2时则有2种，<br>           n=3时，左上角可以横着放也可以竖着放，竖着放的话，右边剩下两列，刚好是f(2)的情况，当横着放的时候，左下角必须横放一个，右边就剩下一列，f(1)，则有f(2)+f(1)种,<br>           因此推导f(n)= f(n-1)+f(n-2)</p>
+<p><strong>代码</strong>：Github<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rectCover</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// write code here</span></span><br><span class="line">    <span class="keyword">var</span> n = number;</span><br><span class="line">    <span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> arr[n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            result = arr[arr.length - <span class="number">1</span>] + arr[arr.length - <span class="number">2</span>];</span><br><span class="line">            arr.push(result);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="11、二进制中1的个数"><a href="#11、二进制中1的个数" class="headerlink" title="11、二进制中1的个数"></a>11、二进制中1的个数</h3><p><strong>题目</strong>：输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+<hr>
+<p>###</p>
+<p><strong>题目</strong>：</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+<hr>
+<p>###</p>
+<p><strong>题目</strong>：</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/21/JS-剑指offer-1/" data-id="cjfmorinz0011r0ji0gjia1n6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/23/JS-前端优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          前端性能优化.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/21/JS-前端算法题汇总/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端算法题.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

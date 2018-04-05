@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>README.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本章节主要总结JavaScript中的一些要点。内容比较凌乱， 主要自己总结以及参考大牛的博文。 目录 AJAX过程以及知识体系 同源策略到前端跨域 Array操作方法 JavaScript编程风格 Math对象 Number对象 String对象 this对象 Promise 正则表达式 递归 闭包 日期格式化 一些常用的JS方法 数组排序方法 DOM遍历 用Javascript获取页面元素的位">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="README.md">
+<meta property="og:url" content="http://yoursite.com/2017/07/05/JS-README/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="本章节主要总结JavaScript中的一些要点。内容比较凌乱， 主要自己总结以及参考大牛的博文。 目录 AJAX过程以及知识体系 同源策略到前端跨域 Array操作方法 JavaScript编程风格 Math对象 Number对象 String对象 this对象 Promise 正则表达式 递归 闭包 日期格式化 一些常用的JS方法 数组排序方法 DOM遍历 用Javascript获取页面元素的位">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-05T14:49:33.457Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="README.md">
+<meta name="twitter:description" content="本章节主要总结JavaScript中的一些要点。内容比较凌乱， 主要自己总结以及参考大牛的博文。 目录 AJAX过程以及知识体系 同源策略到前端跨域 Array操作方法 JavaScript编程风格 Math对象 Number对象 String对象 this对象 Promise 正则表达式 递归 闭包 日期格式化 一些常用的JS方法 数组排序方法 DOM遍历 用Javascript获取页面元素的位">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-README" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/05/JS-README/" class="article-date">
+  <time datetime="2017-07-05T12:07:40.000Z" itemprop="datePublished">2017-07-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      README.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本章节主要总结JavaScript中的一些要点。内容比较凌乱， 主要自己总结以及参考大牛的博文。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="/JS/AJAX使用详细介绍.md">AJAX过程以及知识体系</a></li>
+<li><a href="/JS/同源策略到前端跨域.md"><strong>同源策略到前端跨域</strong></a></li>
+<li><a href="/JS/Array操作方法.md">Array操作方法</a></li>
+<li><a href="/JS/Javascript编程风格.md">JavaScript编程风格</a></li>
+<li><a href="/JS/Math对象.md">Math对象</a></li>
+<li><a href="/JS/Number对象.md">Number对象</a></li>
+<li><a href="/JS/String对象.md">String对象</a></li>
+<li><a href="/JS/this对象.md"><strong>this对象</strong></a></li>
+<li><a href="/JS/Promise.md"><strong>Promise</strong></a></li>
+<li><a href="/JS/正则表达式.md"><strong>正则表达式</strong></a></li>
+<li><a href="/JS/递归.md"><strong>递归</strong></a></li>
+<li><a href="/JS/闭包.md"><strong>闭包</strong></a></li>
+<li><a href="/JS/日期格式化.md">日期格式化</a></li>
+<li><a href="/JS/一些常用的JS方法.md">一些常用的JS方法</a></li>
+<li><a href="http://www.cnblogs.com/dong-xu/p/7088447.html" target="_blank" rel="noopener">数组排序方法</a></li>
+<li><a href="/JS/DOM遍历.md">DOM遍历</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2009/09/find_element_s_position_using_javascript.html" target="_blank" rel="noopener">用Javascript获取页面元素的位置（client scroll offset等宽度）（转载）</a></li>
+<li><a href="http://www.zyy1217.com/2017/04/20/Javascript%20%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener">Javascript 严格模式详解(转载)</a></li>
+<li><a href="/JS/js从原型到原型链.md">JavaScript原型到原型链</a></li>
+<li><a href="/JS/继承.md">JS继承的实现</a></li>
+<li><a href="/JS/闭包.md">JS闭包</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/05/JS-README/" data-id="cjfmoring000lr0jiuc9o43jq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/05/JS-Array操作方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Array操作方法.md
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

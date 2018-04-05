@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端算法题.md | 夏夏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前段算法题汇总前言：尝试自己根据思路去使用js实现的算法，发现对于算法有这么几个问题：  算法是严谨的，一般都是设计到循环，所以要思考到循环中的特殊情况以及循环条件。 不能钻牛角尖，无从下笔时，在纸上写思路，根据思路一步一步实现，在实现的过程中，如果遇到问题，不要慌忙推翻之前的思路，细想之后再改善，大的思路如果不是有很大的问题，先不要推翻，不然很容易陷入到取舍两难的境地。 注意算法的调试方法，尤其">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端算法题.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/JS-前端算法题汇总/index.html">
+<meta property="og:site_name" content="夏夏">
+<meta property="og:description" content="前段算法题汇总前言：尝试自己根据思路去使用js实现的算法，发现对于算法有这么几个问题：  算法是严谨的，一般都是设计到循环，所以要思考到循环中的特殊情况以及循环条件。 不能钻牛角尖，无从下笔时，在纸上写思路，根据思路一步一步实现，在实现的过程中，如果遇到问题，不要慌忙推翻之前的思路，细想之后再改善，大的思路如果不是有很大的问题，先不要推翻，不然很容易陷入到取舍两难的境地。 注意算法的调试方法，尤其">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/prime.gif">
+<meta property="og:updated_time" content="2018-04-05T14:49:33.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端算法题.md">
+<meta name="twitter:description" content="前段算法题汇总前言：尝试自己根据思路去使用js实现的算法，发现对于算法有这么几个问题：  算法是严谨的，一般都是设计到循环，所以要思考到循环中的特殊情况以及循环条件。 不能钻牛角尖，无从下笔时，在纸上写思路，根据思路一步一步实现，在实现的过程中，如果遇到问题，不要慌忙推翻之前的思路，细想之后再改善，大的思路如果不是有很大的问题，先不要推翻，不然很容易陷入到取舍两难的境地。 注意算法的调试方法，尤其">
+<meta name="twitter:image" content="http://yoursite.com/assets/prime.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+          <a class="main-nav-link" href="/tags">分类</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-前端算法题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/21/JS-前端算法题汇总/" class="article-date">
+  <time datetime="2018-03-21T12:14:40.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端算法题.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前段算法题汇总"><a href="#前段算法题汇总" class="headerlink" title="前段算法题汇总"></a>前段算法题汇总</h3><p>前言：尝试自己根据思路去使用js实现的算法，发现对于算法有这么几个问题：</p>
+<ul>
+<li>算法是严谨的，一般都是设计到循环，所以要思考到循环中的特殊情况以及循环条件。</li>
+<li>不能钻牛角尖，无从下笔时，在纸上写思路，根据思路一步一步实现，在实现的过程中，如果遇到问题，不要慌忙推翻之前的思路，细想之后再改善，大的思路如果不是有很大的问题，先不要推翻，不然很容易陷入到取舍两难的境地。</li>
+<li>注意算法的调试方法，尤其是输出，断点的灵活应用。 </li>
+</ul>
+<h4 id="1、数组去重"><a href="#1、数组去重" class="headerlink" title="1、数组去重"></a>1、数组去重</h4><p>数组去重的几种方法请参照<a href="/JS/Array操作方法.md">数组操作方法</a></p>
+<h4 id="2、js脚本整理文件"><a href="#2、js脚本整理文件" class="headerlink" title="2、js脚本整理文件"></a>2、js脚本整理文件</h4><p>整理前：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">111.232</span><span class="number">.213</span> ascqwdwd</span><br><span class="line"><span class="number">111.232</span><span class="number">.213</span> qwdqwdqw</span><br><span class="line"><span class="number">122.31</span><span class="number">.34</span><span class="number">.1</span> wdojqwodjqwp  </span><br><span class="line"><span class="number">232.34</span><span class="number">.13</span><span class="number">.3</span> adhwdhwqhd</span><br></pre></td></tr></table></figure>
+<p>整理后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'111.232.213'</span>: [ <span class="string">'ascqwdwd'</span>, <span class="string">'qwdqwdqw'</span> ],</span><br><span class="line"><span class="string">'122.31.34.1'</span>: [ <span class="string">'wdojqwodjqwp'</span> ],</span><br><span class="line"><span class="string">'232.34.13.3'</span>: [ <span class="string">'adhwdhwqhd'</span> ]</span><br></pre></td></tr></table></figure>
+<h4 id="3、求1000以内所有的质数"><a href="#3、求1000以内所有的质数" class="headerlink" title="3、求1000以内所有的质数"></a>3、求1000以内所有的质数</h4><p>对于求质数，和判断一个数是不是质数，原理是一样，区别在于求质数是对一群数进行判断，复杂度提高，如果只是判断一个数是不是质数，不要考虑复杂度，直接从2到这个数的平方根开始循环看能不能整除。<br>对于求多少以内的质数，也可以这样，但是这样的时间复杂度就提高了，网上有说<a href="https://program-think.blogspot.com/2011/12/prime-algorithm-1.html" target="_blank" rel="noopener">几种不同的境界</a>，这里就不介绍，我才用的筛选法，很明显，对于明显不是质数的数，没有做运算，节省的时间。<br><img src="/assets/prime.gif" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 求num中所有质数</span></span><br><span class="line"><span class="comment"> * 对比各种求质数的算法，试除法、筛选法两种时间复杂度较低，</span></span><br><span class="line"><span class="comment"> * 本方法是自己优化的筛选法，因为2,3是比较小的两个质数，大部分数都是他们的倍数，明显不是质数，</span></span><br><span class="line"><span class="comment"> * 所以使用2,3为基数，先筛选走这些非质数，然后在从5 7等向上筛选，这种方法明显循环次数要少。时间复杂度我也不知道该怎么计算。</span></span><br><span class="line"><span class="comment"> * **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prime</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//定义基数数组baseArr，用来存放较小的质数，res存放筛选结果，base存放[2,3]</span></span><br><span class="line">    <span class="keyword">let</span> baseArr = [], res = [], base = [];</span><br><span class="line">    num = ~~num;  <span class="comment">//取整</span></span><br><span class="line">    <span class="comment">//对2,3 特殊对待</span></span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num === <span class="number">1</span>)</span><br><span class="line">            alert(<span class="string">'请输入大于1的整数'</span>)</span><br><span class="line">        <span class="keyword">if</span> (num === <span class="number">2</span>)</span><br><span class="line">            base.push(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            base.push(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//筛选剩下的</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        baseArr.push(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        base.push(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt;= num; i++) &#123;  <span class="comment">//将2,3的倍数剔除，其余的放入res进行下一轮筛选</span></span><br><span class="line">            <span class="keyword">if</span> (i % <span class="number">2</span> !== <span class="number">0</span> &amp;&amp; i % <span class="number">3</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">                res.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt;= baseArr.length - <span class="number">1</span>; j++) &#123;  <span class="comment">//以大于3最小的质数开始筛选，</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (res[i] % res[j] === <span class="number">0</span> &amp;&amp; i !== j) &#123;  <span class="comment">//除自身外，其他的是质数的倍数的数被剔除</span></span><br><span class="line">                    res.splice(i, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (res[j] &lt; <span class="built_in">Math</span>.sqrt(num)) &#123;  <span class="comment">//确保基数质数肯定小于sqrt(num)</span></span><br><span class="line">                baseArr.push(res[j]);   <span class="comment">//添加一个新的基数质数。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> base.concat(res)  <span class="comment">//将特殊的[2,3]加入返回。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(prime(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]</span></span><br><span class="line"><span class="comment">// baseArr = [2,3,5,7]</span></span><br></pre></td></tr></table></figure>
+<h4 id="4、不借助临时变量，进行两个整数的交换"><a href="#4、不借助临时变量，进行两个整数的交换" class="headerlink" title="4、不借助临时变量，进行两个整数的交换"></a>4、不借助临时变量，进行两个整数的交换</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exchange</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    b=a-b;</span><br><span class="line">    a=a-b;</span><br><span class="line">    b=a+b;</span><br><span class="line">    <span class="keyword">return</span> [a,b]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5、找出数组最大的差值"><a href="#5、找出数组最大的差值" class="headerlink" title="5、找出数组最大的差值"></a>5、找出数组最大的差值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">maxDiff</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max.apply(array,array) - <span class="built_in">Math</span>.min.apply(array,array);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(maxDiff(arr));</span><br></pre></td></tr></table></figure>
+<p>6、</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/21/JS-前端算法题汇总/" data-id="cjfmorio30015r0ji4ypmek9r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/21/JS-剑指offer-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          剑指Offer-JavaScript版-part1.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/21/JS-作用域与变量提升/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS中作用域与变量提升.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+    <a href="/tags" class="mobile-nav-link">分类</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
