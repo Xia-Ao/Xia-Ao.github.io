@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏夏盟主</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="夏夏盟主">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="夏夏盟主">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏夏盟主">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏盟主" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏盟主</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-JS-剑指offer-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/21/JS-剑指offer-1/" class="article-date">
+  <time datetime="2018-03-21T12:15:40.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/21/JS-剑指offer-1/">剑指Offer-JavaScript版-part1.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="指offer实战-JavaScript版"><a href="#指offer实战-JavaScript版" class="headerlink" title="指offer实战-JavaScript版"></a>指offer实战-JavaScript版</h3><p>前言：以前刚学JS的时候，一直觉得前端不怎么需要算法，就是单纯的实现业务功能，现在想想那时候的想法多少天真，可以说用幼稚来形容了。作为一个合格的程序猿，怎么可能不搞算法，前端的算法不会太复杂，一般都是一些比较简单的算法，对照剑指offer，将里面的算法重新实战一遍，代码位置在另一个仓库<a href="https://github.com/Xia-Ao/Offer" target="_blank" rel="noopener">Offer</a></p>
+<h3 id="1、二维数组中的查找"><a href="#1、二维数组中的查找" class="headerlink" title="1、二维数组中的查找"></a>1、二维数组中的查找</h3><p><strong>题目</strong>：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<p><strong>思路</strong>：二维数组是有规律的，按照横纵展开，向右向下递增。选取数组右上角的数字，如果该数字等于要查找的数组，则结束。如果大于要查找的数字，则该列都大于要查找的数字，剔除该列，向左移动一列继续查找；如果小于要查找的数字，则该行都小于要查找的数字，剔除该行，向下移动一行继续查找；直到查找到该数字或者查找到左下角还没有匹配，则返回没有匹配。</p>
+<p><strong>代码</strong>：<a href="https://github.com/Xia-Ao/Offer/tree/master/offer" target="_blank" rel="noopener">github</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">array, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> row = array.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = row, j = <span class="number">0</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &lt; array[i].length;) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target === array[i][j]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &gt; array[i][j]) &#123; <span class="comment">//目标大于，则下移一行</span></span><br><span class="line">            j++;  <span class="comment">//向下移动一行</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i--;  <span class="comment">//向左一动一行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2、替换空格"><a href="#2、替换空格" class="headerlink" title="2、替换空格"></a>2、替换空格</h3><p><strong>题目</strong>：请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。</p>
+<p><strong>思路</strong>：当然是直接用正则匹配然后使用replace替换就好了。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replaceSpace</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/\s/g</span>);</span><br><span class="line">    <span class="keyword">return</span> str.replace(reg, <span class="string">'--'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3、从尾到头打印链表"><a href="#3、从尾到头打印链表" class="headerlink" title="3、从尾到头打印链表"></a>3、从尾到头打印链表</h3><p><strong>题目</strong>：输入一个链表，从尾到头打印链表每个节点的值。</p>
+<p>不懂链表的可以参考《学习JavaScript的数据结构与算法》</p>
+<p><strong>思路</strong>：先将链表每个结点的值存入数组中，然后通过数组的reverse方法，即可从尾到头打印</p>
+<p>代码：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printLinkedList</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [];</span><br><span class="line">    <span class="keyword">while</span> (head !== <span class="literal">null</span>) &#123;</span><br><span class="line">        arr.push(head);</span><br><span class="line">        head = head.next();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr.reverse();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4、重建二叉树"><a href="#4、重建二叉树" class="headerlink" title="4、重建二叉树"></a>4、重建二叉树</h3><p><strong>题目</strong>：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+<hr>
+<h3 id="5、用两个栈来实现一个队列"><a href="#5、用两个栈来实现一个队列" class="headerlink" title="5、用两个栈来实现一个队列"></a>5、用两个栈来实现一个队列</h3><p><strong>题目</strong>：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型</p>
+<p><strong>思路</strong>：栈的操作是后入先出（LIFO），队列的操作是先入先出（FIFO）</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = [], arr2 = [], result = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    arr2.push(head);</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shift</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (arr1.length) &#123;</span><br><span class="line">        arr1.shift()</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr2.length) &#123;</span><br><span class="line">        arr2.shift()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="6、旋转数组的最小数字"><a href="#6、旋转数组的最小数字" class="headerlink" title="6、旋转数组的最小数字"></a>6、旋转数组的最小数字</h3><p><strong>题目</strong>：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。</p>
+<p><strong>思路</strong>：其实剑指Offer中想要表达的是一种寻找数组最小值的二分查找方法，旋转之后原数组分为两个部分，[3,4,5,1,2],前面的部分最小的数肯定大于或等于后面部分最大的数，通过这一点可以节省遍历，典型的二分法。</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotate</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arr.sort(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a &lt; b)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//        return Math.min.apply(arr, arr);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="7、斐波那契数列"><a href="#7、斐波那契数列" class="headerlink" title="7、斐波那契数列"></a>7、斐波那契数列</h3><p><strong>题目</strong>：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。<code>n&lt;=39</code></p>
+<p><strong>思路</strong>：传统思路是使用递归，这种方法简单直接，但是会有一个问题，存在严重的效率问题，很多的重复计算，因此，剑指Offer提出一种优化方法，使用内存记录之前的计算结果，从0 ，1 ，2 开始一直到n，计算过的值被记录下来，就不用再计算了。大大的节省了时间。</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibonacci</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n === <span class="number">0</span> || n === <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> one = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">var</span> two = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">                result = one + two;</span><br><span class="line">                one = two;</span><br><span class="line">                two = result</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="8、跳台阶"><a href="#8、跳台阶" class="headerlink" title="8、跳台阶"></a>8、跳台阶</h3><p><strong>题目</strong>：一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<p><strong>思路</strong>：其实就是斐波那契函数的应用，如果n=1则只有一种，如果n=2则有两种,如果n=3，则有前两种之和，记一个函数f(n),则跳法为f(n-1)+f(n-2)</p>
+<p><strong>代码</strong>：Github</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibonacci</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> one = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">var</span> two = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">                result = one + two;</span><br><span class="line">                one = two;</span><br><span class="line">                two = result</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="9、变态跳台阶"><a href="#9、变态跳台阶" class="headerlink" title="9、变态跳台阶"></a>9、变态跳台阶</h3><p><strong>题目</strong>：一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<p><strong>思路</strong>：其实就是斐波那契函数的应用，如果n=1则只有一种，如果n=2则有两种,如果n=3，则有前两种之和在加上自己跳n阶的一种，记一个函数f(n),则跳法为f(n-1)+f(n-2)+…+f(1)+1</p>
+<p><strong>代码</strong>：Github<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fibonacci</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> arr[n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            result = <span class="number">1</span> + arr.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, currentValue</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> total + currentValue;</span><br><span class="line">            &#125;);</span><br><span class="line">            arr.push(result);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="10、矩形覆盖"><a href="#10、矩形覆盖" class="headerlink" title="10、矩形覆盖"></a>10、矩形覆盖</h3><p><strong>题目</strong>：我们可以用2<em>1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2</em>1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？</p>
+<p><strong>思路</strong>：其实就是斐波那契函数的应用，注意题目中是无重叠，如果n=1则只有一种，n=2时则有2种，<br>           n=3时，左上角可以横着放也可以竖着放，竖着放的话，右边剩下两列，刚好是f(2)的情况，当横着放的时候，左下角必须横放一个，右边就剩下一列，f(1)，则有f(2)+f(1)种,<br>           因此推导f(n)= f(n-1)+f(n-2)</p>
+<p><strong>代码</strong>：Github<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rectCover</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// write code here</span></span><br><span class="line">    <span class="keyword">var</span> n = number;</span><br><span class="line">    <span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> arr[n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            result = arr[arr.length - <span class="number">1</span>] + arr[arr.length - <span class="number">2</span>];</span><br><span class="line">            arr.push(result);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="11、二进制中1的个数"><a href="#11、二进制中1的个数" class="headerlink" title="11、二进制中1的个数"></a>11、二进制中1的个数</h3><p><strong>题目</strong>：输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+<hr>
+<p>###</p>
+<p><strong>题目</strong>：</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+<hr>
+<p>###</p>
+<p><strong>题目</strong>：</p>
+<p><strong>思路</strong>：</p>
+<p><strong>代码</strong>：Github</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/21/JS-剑指offer-1/" data-id="cjfmpdxfg000xwkjidqy0ox51" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-前端算法题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/21/JS-前端算法题汇总/" class="article-date">
+  <time datetime="2018-03-21T12:14:40.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/21/JS-前端算法题汇总/">前端算法题.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前段算法题汇总"><a href="#前段算法题汇总" class="headerlink" title="前段算法题汇总"></a>前段算法题汇总</h3><p>前言：尝试自己根据思路去使用js实现的算法，发现对于算法有这么几个问题：</p>
+<ul>
+<li>算法是严谨的，一般都是设计到循环，所以要思考到循环中的特殊情况以及循环条件。</li>
+<li>不能钻牛角尖，无从下笔时，在纸上写思路，根据思路一步一步实现，在实现的过程中，如果遇到问题，不要慌忙推翻之前的思路，细想之后再改善，大的思路如果不是有很大的问题，先不要推翻，不然很容易陷入到取舍两难的境地。</li>
+<li>注意算法的调试方法，尤其是输出，断点的灵活应用。 </li>
+</ul>
+<h4 id="1、数组去重"><a href="#1、数组去重" class="headerlink" title="1、数组去重"></a>1、数组去重</h4><p>数组去重的几种方法请参照<a href="/JS/Array操作方法.md">数组操作方法</a></p>
+<h4 id="2、js脚本整理文件"><a href="#2、js脚本整理文件" class="headerlink" title="2、js脚本整理文件"></a>2、js脚本整理文件</h4><p>整理前：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">111.232</span><span class="number">.213</span> ascqwdwd</span><br><span class="line"><span class="number">111.232</span><span class="number">.213</span> qwdqwdqw</span><br><span class="line"><span class="number">122.31</span><span class="number">.34</span><span class="number">.1</span> wdojqwodjqwp  </span><br><span class="line"><span class="number">232.34</span><span class="number">.13</span><span class="number">.3</span> adhwdhwqhd</span><br></pre></td></tr></table></figure>
+<p>整理后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'111.232.213'</span>: [ <span class="string">'ascqwdwd'</span>, <span class="string">'qwdqwdqw'</span> ],</span><br><span class="line"><span class="string">'122.31.34.1'</span>: [ <span class="string">'wdojqwodjqwp'</span> ],</span><br><span class="line"><span class="string">'232.34.13.3'</span>: [ <span class="string">'adhwdhwqhd'</span> ]</span><br></pre></td></tr></table></figure>
+<h4 id="3、求1000以内所有的质数"><a href="#3、求1000以内所有的质数" class="headerlink" title="3、求1000以内所有的质数"></a>3、求1000以内所有的质数</h4><p>对于求质数，和判断一个数是不是质数，原理是一样，区别在于求质数是对一群数进行判断，复杂度提高，如果只是判断一个数是不是质数，不要考虑复杂度，直接从2到这个数的平方根开始循环看能不能整除。<br>对于求多少以内的质数，也可以这样，但是这样的时间复杂度就提高了，网上有说<a href="https://program-think.blogspot.com/2011/12/prime-algorithm-1.html" target="_blank" rel="noopener">几种不同的境界</a>，这里就不介绍，我才用的筛选法，很明显，对于明显不是质数的数，没有做运算，节省的时间。<br><img src="/assets/prime.gif" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 求num中所有质数</span></span><br><span class="line"><span class="comment"> * 对比各种求质数的算法，试除法、筛选法两种时间复杂度较低，</span></span><br><span class="line"><span class="comment"> * 本方法是自己优化的筛选法，因为2,3是比较小的两个质数，大部分数都是他们的倍数，明显不是质数，</span></span><br><span class="line"><span class="comment"> * 所以使用2,3为基数，先筛选走这些非质数，然后在从5 7等向上筛选，这种方法明显循环次数要少。时间复杂度我也不知道该怎么计算。</span></span><br><span class="line"><span class="comment"> * **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prime</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//定义基数数组baseArr，用来存放较小的质数，res存放筛选结果，base存放[2,3]</span></span><br><span class="line">    <span class="keyword">let</span> baseArr = [], res = [], base = [];</span><br><span class="line">    num = ~~num;  <span class="comment">//取整</span></span><br><span class="line">    <span class="comment">//对2,3 特殊对待</span></span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num === <span class="number">1</span>)</span><br><span class="line">            alert(<span class="string">'请输入大于1的整数'</span>)</span><br><span class="line">        <span class="keyword">if</span> (num === <span class="number">2</span>)</span><br><span class="line">            base.push(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            base.push(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//筛选剩下的</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        baseArr.push(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        base.push(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt;= num; i++) &#123;  <span class="comment">//将2,3的倍数剔除，其余的放入res进行下一轮筛选</span></span><br><span class="line">            <span class="keyword">if</span> (i % <span class="number">2</span> !== <span class="number">0</span> &amp;&amp; i % <span class="number">3</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">                res.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt;= baseArr.length - <span class="number">1</span>; j++) &#123;  <span class="comment">//以大于3最小的质数开始筛选，</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (res[i] % res[j] === <span class="number">0</span> &amp;&amp; i !== j) &#123;  <span class="comment">//除自身外，其他的是质数的倍数的数被剔除</span></span><br><span class="line">                    res.splice(i, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (res[j] &lt; <span class="built_in">Math</span>.sqrt(num)) &#123;  <span class="comment">//确保基数质数肯定小于sqrt(num)</span></span><br><span class="line">                baseArr.push(res[j]);   <span class="comment">//添加一个新的基数质数。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> base.concat(res)  <span class="comment">//将特殊的[2,3]加入返回。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(prime(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]</span></span><br><span class="line"><span class="comment">// baseArr = [2,3,5,7]</span></span><br></pre></td></tr></table></figure>
+<h4 id="4、不借助临时变量，进行两个整数的交换"><a href="#4、不借助临时变量，进行两个整数的交换" class="headerlink" title="4、不借助临时变量，进行两个整数的交换"></a>4、不借助临时变量，进行两个整数的交换</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exchange</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    b=a-b;</span><br><span class="line">    a=a-b;</span><br><span class="line">    b=a+b;</span><br><span class="line">    <span class="keyword">return</span> [a,b]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5、找出数组最大的差值"><a href="#5、找出数组最大的差值" class="headerlink" title="5、找出数组最大的差值"></a>5、找出数组最大的差值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">maxDiff</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max.apply(array,array) - <span class="built_in">Math</span>.min.apply(array,array);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(maxDiff(arr));</span><br></pre></td></tr></table></figure>
+<p>6、</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/21/JS-前端算法题汇总/" data-id="cjfmpdxfl0011wkji22pzqbaw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-作用域与变量提升" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/21/JS-作用域与变量提升/" class="article-date">
+  <time datetime="2018-03-21T12:12:40.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/21/JS-作用域与变量提升/">JS中作用域与变量提升.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ES5中for循环定义的全局变量"><a href="#ES5中for循环定义的全局变量" class="headerlink" title="ES5中for循环定义的全局变量"></a>ES5中for循环定义的全局变量</h3><p>下面表达式输出的结果为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)</span><br><span class="line"></span><br><span class="line"><span class="comment">//4  这是for循环执行完成之后，i++此时的i已经变成4，所以for循环之后的所有关于i的值都是4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+<p>因为在表达式中定义的<code>var i</code>是全局作用域变量，任何一个地方都可以访问到，并且一定注意，在for循环内，如果都是同步执行的话，则i的值为3，但是如果是类似异步的，for执行完毕之后为i为4，所以所有i的值都为4.</p>
+<h3 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h3><p>先看一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; ... &#125;()；</span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fName</span>(<span class="params"></span>)</span>&#123; ... &#125;();</span><br></pre></td></tr></table></figure>
+<p>执行结果为: <code>SyntaxError: Unexpected token (</code>，为什么会有这个错误呢？</p>
+<p>要理解两个概念</p>
+<p><strong>函数声明</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">name</span>(<span class="params">[param[, param[, ... param]]]</span>) </span>&#123;</span><br><span class="line">   statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>函数表达式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//一个匿名函数的函数表达式，被赋值给变量f2:</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"f2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过()来调用此函数</span></span><br><span class="line"></span><br><span class="line">f2();</span><br></pre></td></tr></table></figure>
+<p>所以我们来看之前报错的原因，这是一个函数声明，后面再接一个() ，js引擎看到function关键字之后，认为后面跟的是函数定义语句，不应该以圆括号结尾，解决这个问题就是让引擎知道，<strong>圆括号前面的部分不是函数定义语句，而是一个表达式，可以对此进行运算</strong>。改写成这样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* code */</span> &#125;()); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* code */</span> &#125;)();</span><br></pre></td></tr></table></figure>
+<h5 id="带参数-parameter"><a href="#带参数-parameter" class="headerlink" title="带参数(parameter)"></a>带参数(parameter)</h5><p>有时候看到这样的一种形式，括号中传递一个参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123; <span class="keyword">return</span> p&#125;)(parameter);</span><br></pre></td></tr></table></figure>
+<p>立即 执行的括号中传入了一个参数，执行的过程中此参数就是函数传入的参数。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/21/JS-作用域与变量提升/" data-id="cjfmpdxfi000zwkjil3wzjldw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-事件机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/20/JS-事件机制/" class="article-date">
+  <time datetime="2018-03-20T12:11:40.000Z" itemprop="datePublished">2018-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/20/JS-事件机制/">JS事件.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h3><p><img src="/assets/event.png" alt=""></p>
+<h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><p>事件绑定后，检测顺序就会从被绑定的DOM下滑到触发的元素，再冒泡会绑定的DOM上。也就是说，如果你监听了一个DOM节点，那也就等于你监听了其所有的后代节点。</p>
+<p>代理的意思就是只监听父节点的事件触发，以来代理对其后代节点的监听，而你需要做的只是通过<code>currentTarget</code>属性得到触发元素并作出回应。</p>
+<p>使用事件代理意味着你可以节省大量重复的事件监听，以减少浏览器资源消耗。还有一个好处就是让HTML独立起来，比如之后还有要加子元素的需求，也不需要再为其单独加事件监听了。</p>
+<h3 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h3><p>DOM0级事件处理就是讲一个函数赋值给一个事件处理程序属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.onclick=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>DOM2级事件处理程序，这里因为历史原因，IE的事件处理操作API名称和常规的不太一样，所以，一般需要考虑到浏览器兼容，高程上给出了一个扩浏览器的EventUtil对象，会检测是是否支持DOM2级事件处理，以及IE下的情况。优先推荐。<br><strong>注意</strong> ：addEventListener()/removeEventListener()最后一个参数为boolean值，true表示在捕获阶段调用事件处理函数，false表示在冒泡阶段处理。</p>
+<p>IE下的attachEvent()  detachEvent()没有这个布尔值，因为早期IE只支持冒泡，所以IE处理默认冒泡。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** DOM2级事件处理程序  浏览器兼容</span></span><br><span class="line"><span class="comment"> * IE-attachEvent()  detachEvent()</span></span><br><span class="line"><span class="comment"> * 其他-addEventListener()  removeEventListener()</span></span><br><span class="line"><span class="comment"> * EventUtil: 全局对象</span></span><br><span class="line"><span class="comment"> * 使用：EventUtil.addHandler(ele,type,handler)</span></span><br><span class="line"><span class="comment"> * **/</span></span><br><span class="line"><span class="keyword">let</span> EventUtil = &#123;</span><br><span class="line">    addHandler: <span class="function">(<span class="params">element, type, handler</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (element.addEventListener) &#123;</span><br><span class="line">            element.addEventListener(type, handler, <span class="literal">false</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent) &#123;</span><br><span class="line">            element.attachEvent(<span class="string">'on'</span> + type, handler)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element[<span class="string">'on'</span> + type] = handler;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    removeHandler: <span class="function">(<span class="params">element, type, handler</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (element.removeEventListener) &#123;</span><br><span class="line">            element.removeEventListener(type, handler, <span class="literal">false</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent()) &#123;</span><br><span class="line">            element.detachEvent(<span class="string">'on'</span> + type, handler)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element[<span class="string">'on'</span> + type] = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>在触发 DOM 上的某个事件时，会产生一个事件对象 event ，这个对象中包含着所有与事件有关的信息。包括导致事件的元素、事件的类型以及其他与特定事件相关的信息。例如，鼠标操作导致的事件对象中，会包含鼠标位置的信息，而键盘操作导致的事件对象中，会包含与按下的键有关的信息。所有浏览器都支持 event 对象，但支持方式不同。</p>
+<p>当然，在事件对象中IE也有不一样的地方。后面再区别，先看DOM2级事件对象。<br><img src="/assets/eventObj.png" alt=""></p>
+<p>在事件处理程序内部，对象 this 始终等于 currentTarget 的值，而 target 则只包含事件的实际目标。如果直接将事件处理程序指定给了目标元素，则 this 、 currentTarget 和 target 包含相同的值。。如果事件处理程序存在于按钮的父节点中（例如 document.body ），那么这些值是不相同的。</p>
+<h5 id="IE中的事件对象"><a href="#IE中的事件对象" class="headerlink" title="IE中的事件对象"></a>IE中的事件对象</h5><p><img src="/assets/enevt-ie.png" alt=""></p>
+<h3 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型<img src="/assets/eventType1.png" alt=""></h3><p>这里面主要记住UI事件，大部分是window对象相关。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="/assets/eventType2.png" alt=""></h3><h2 id="内存和性能优化"><a href="#内存和性能优化" class="headerlink" title="内存和性能优化"></a>内存和性能优化</h2><p>在 JavaScript 中，添加到页面上的事件处理程序数量将直接关系到页面的整体运行性能。导致这一问题的原因是多方面的。首先，每个函数都是对象，都会占用内存；内存中的对象越多，性能就越差。其次，必须事先指定所有事件处理程序而导致的 DOM访问次数，会延迟整个页面的交互就绪时间。当然最直接的就是<strong>减少页面中事件处理程序</strong>。</p>
+<h4 id="优化方案一：使用事件委托"><a href="#优化方案一：使用事件委托" class="headerlink" title="优化方案一：使用事件委托"></a>优化方案一：使用事件委托</h4><p>事件委托利用了事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。一个典型的应用就是比如有一批列表，给每一个列表都添加一个事件处理程序，则内存占用比较大，然后操作也比较复杂，如果在DOM中尽量高一层级上添加一个事件处理程序，利用事件冒泡，可以让每一个列表都可以获取到事件处理。这种技术对用户最终的结果与之前的方法差不多，但是需要的内存更少。</p>
+<p>使用事件委托技术，与传统方法相比较，有如下优势：</p>
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/assets/eventProxy.png" alt=""></h4><h4 id="优化方案二：移除时间事件处理程序"><a href="#优化方案二：移除时间事件处理程序" class="headerlink" title="优化方案二：移除时间事件处理程序"></a>优化方案二：移除时间事件处理程序</h4><p>内存中保留着那些过时不用的“空事件处理程序”，也是造成Web应用程序内存和性能问题的主要原因。两种典型的情况会造成“空事件处理程序占用内存”的问题：</p>
+<ul>
+<li>从文档中移除带有事件处理程序的元素时。<br>这可能是通过纯粹的 DOM 操作，例如使用 removeChild() 和 replaceChild() 方法，但更多地是发<br>生在使用 innerHTML 替换页面中某一部分的时候。如果带有事件处理程序的元素被 innerHTML 删除<br>了，那么原来添加到元素中的事件处理程序极有可能无法被当作垃圾回收。</li>
+</ul>
+<p>一般使用手工移除事件处理程序，<code>btn.onclick=null;</code>，然后再设置innerHTML。</p>
+<ul>
+<li>卸载页面。如果在页面被卸载之前没<br>有清理干净事件处理程序，那它们就会滞留在内存中。每次加载完页面再卸载页面时（可能是在两个页<br>面间来回切换，也可以是单击了“刷新”按钮），内存中滞留的对象数目就会增加，因为事件处理程序<br>占用的内存并没有被释放。 </li>
+</ul>
+<p>一般来说，最好的做法是在页面卸载之前，先通过onunload事件处理程序移除所有事件处理程序。</p>
+<p>说到 这里，就又可以看到事件委托技术的优势，如果事件追踪的越少，越容易移除。</p>
+<h3 id="mouse事件"><a href="#mouse事件" class="headerlink" title="mouse事件"></a>mouse事件</h3><p><strong>mouseover与mouseenter</strong></p>
+<p>不论鼠标指针穿过被选元素或其子元素，都会触发 mouseover 事件。</p>
+<p>只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件。</p>
+<p><strong>mouseout与mouseleave</strong></p>
+<p>不论鼠标指针离开被选元素还是任何子元素，都会触发 mouseout 事件。</p>
+<p>只有在鼠标指针离开被选元素时，才会触发 mouseleave 事件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/20/JS-事件机制/" data-id="cjfmpdxfc000twkji2lw7ai5b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-Object对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/15/JS-Object对象/" class="article-date">
+  <time datetime="2018-03-15T09:05:40.000Z" itemprop="datePublished">2018-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/JS-Object对象/">Object对象及其遍历方法.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Object遍历方法"><a href="#Object遍历方法" class="headerlink" title="Object遍历方法"></a>Object遍历方法</h3><h4 id="1、for-in"><a href="#1、for-in" class="headerlink" title="1、for   in"></a>1、for   in</h4><h4 id="2、Object-keys"><a href="#2、Object-keys" class="headerlink" title="2、Object.keys"></a>2、Object.keys</h4><h4 id="3、Object-getOwnPropertyNames"><a href="#3、Object-getOwnPropertyNames" class="headerlink" title="3、Object.getOwnPropertyNames"></a>3、Object.getOwnPropertyNames</h4><h4 id="4、for-…-of-（ES6）"><a href="#4、for-…-of-（ES6）" class="headerlink" title="4、for … of （ES6）"></a>4、for … of （ES6）</h4><h4 id="5、Object-values-（ES7）"><a href="#5、Object-values-（ES7）" class="headerlink" title="5、Object.values （ES7）"></a>5、Object.values （ES7）</h4><h4 id="6、Object-entries-（ES7）"><a href="#6、Object-entries-（ES7）" class="headerlink" title="6、Object.entries （ES7）"></a>6、Object.entries （ES7）</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/15/JS-Object对象/" data-id="cjfmpdxet000fwkjivdtldjfv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-递归" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/13/JS-递归/" class="article-date">
+  <time datetime="2018-03-13T14:23:40.000Z" itemprop="datePublished">2018-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/JS-递归/">递归.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>递归函数是在一个函数通过名字调用自身的情况下构成的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (num &lt;= <span class="number">1</span>)&#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> num * factorial(num<span class="number">-1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个经典的递归阶乘函数。虽然这个函数表面看来没什么问题，但下面的代码却可能导致它出错。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> anotherFactorial = factorial; </span><br><span class="line">factorial = <span class="literal">null</span>; </span><br><span class="line">alert(anotherFactorial(<span class="number">4</span>)); <span class="comment">//出错！</span></span><br></pre></td></tr></table></figure>
+<p>原始函数中有对factorial的引用，将<code>factorial=null</code>后factorial被销毁了，所以执行这个引用后找不到。</p>
+<h3 id="使用arguments-callee"><a href="#使用arguments-callee" class="headerlink" title="使用arguments.callee"></a>使用<code>arguments.callee</code></h3><p>稳妥的递归用法使用<code>arguments.callee</code> ，<code>arguments</code>是一个对应于传递给函数的参数的类数组对象，<code>arguments.callee</code>指向正在执行的函数指针。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (num &lt;= <span class="number">1</span>)&#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> num * <span class="built_in">arguments</span>.callee(num<span class="number">-1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是在严格模式下，不能访问<code>arguments.callee</code> ，使用命名函数表达式实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> factorial = (<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">num</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (num &lt;= <span class="number">1</span>)&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> num * f(num<span class="number">-1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上代码创建了一个名为 f() 的命名函数表达式，然后将它赋值给变量 factorial 。即便把函数赋值给了另一个变量，函数的名字 f 仍然有效，所以递归调用照样能正确完成。这种方式在严格模式和非严格模式下都行得通。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/13/JS-递归/" data-id="cjfmpdxgd001jwkji6lsgxepp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/12/JS-正则表达式/" class="article-date">
+  <time datetime="2018-03-12T12:20:40.000Z" itemprop="datePublished">2018-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/12/JS-正则表达式/">正则表达式.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于正则表达式的匹配，一开始觉得很复杂，主要是因为表达式看不懂，不知道什么是匹配符，限定符，操作符，其实使用过后才发现，正则表达其实是比较简单的，具体的参考下面一篇博文，《<a href="https://segmentfault.com/a/1190000000699097" target="_blank" rel="noopener">JavaScript学习总结（八）正则表达式</a>》里面对于概念的讲解比较详细，正则的使用主要看自己怎么去组合，想要匹配什么样的内容，很多时候，我们要用到的正则匹配，其实网上都有比较全的正则表达式，直接搜索就可以获取到。</p>
+<p>充分利用网上的资源才是正确学习正则的途径。</p>
+<p>我对于正则的害怕主要是因为记不住正则表达式中特殊字符，MDN有一张表格，很完整很权威，对照这张表格就可以的。要求看到特殊字符就知道是什么意思。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener"><strong>MDN-正则表达式</strong></a></p>
+<p>注意正则有一些字符类匹配，很多时候大家都是使用字符类匹配。这个要记住。</p>
+<p><img src="/assets/import4.png" alt="">重复匹配符也要注意，这个也要记住，一看就能知道表达的匹配范围。</p>
+<p><img src="/assets/import5.png" alt=""><img src="/assets/import6.png" alt="">其他的东西就直接在博文上看就可以了。</p>
+<p>下面有一个导图，记住这个导图你就理解了。<img src="/assets/2805273310-5427ad34d27ef.gif" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/12/JS-正则表达式/" data-id="cjfmpdxg2001bwkjim7b3crk2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-日期格式化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/12/JS-日期格式化/" class="article-date">
+  <time datetime="2018-03-12T12:19:40.000Z" itemprop="datePublished">2018-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/12/JS-日期格式化/">日期格式化.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'usestrict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**=========================================================</span></span><br><span class="line"><span class="comment"> * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，</span></span><br><span class="line"><span class="comment"> * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)</span></span><br><span class="line"><span class="comment"> * 例子：</span></span><br><span class="line"><span class="comment"> * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==&gt; 2006-07-02 08:09:04.423</span></span><br><span class="line"><span class="comment"> * (new Date()).Format("yyyy-M-d h:m:s.S") ==&gt; 2006-7-2 8:9:4.18</span></span><br><span class="line"><span class="comment"> =========================================================*/</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Date</span>.prototype.format = <span class="function"><span class="keyword">function</span> (<span class="params">fmt</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span>(fmt) == <span class="string">"undefined"</span>) &#123;</span><br><span class="line">            fmt = <span class="string">"yyyy-MM-dd hh:mm:ss"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> o = &#123;</span><br><span class="line">            <span class="string">"M+"</span>: <span class="keyword">this</span>.getMonth() + <span class="number">1</span>, <span class="comment">//月份</span></span><br><span class="line">            <span class="string">"d+"</span>: <span class="keyword">this</span>.getDate(), <span class="comment">//日</span></span><br><span class="line">            <span class="string">"h+"</span>: <span class="keyword">this</span>.getHours(), <span class="comment">//小时</span></span><br><span class="line">            <span class="string">"m+"</span>: <span class="keyword">this</span>.getMinutes(), <span class="comment">//分</span></span><br><span class="line">            <span class="string">"s+"</span>: <span class="keyword">this</span>.getSeconds(), <span class="comment">//秒</span></span><br><span class="line">            <span class="string">"q+"</span>: <span class="built_in">Math</span>.floor((<span class="keyword">this</span>.getMonth() + <span class="number">3</span>) / <span class="number">3</span>), <span class="comment">//季度</span></span><br><span class="line">            <span class="string">"S"</span>: <span class="keyword">this</span>.getMilliseconds() <span class="comment">//毫秒</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//年份是最多表示有四位数，所以分开来处理</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="regexp">/(y+)/</span>.test(fmt)) &#123;</span><br><span class="line">            fmt = fmt.replace(<span class="built_in">RegExp</span>.$<span class="number">1</span>, (<span class="keyword">this</span>.getFullYear() + <span class="string">""</span>).substr(<span class="number">4</span> - <span class="built_in">RegExp</span>.$<span class="number">1.</span>length));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//遍历其他的都是两位数的时间内容</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> o) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"("</span> + k + <span class="string">")"</span>).test(fmt))</span><br><span class="line">                fmt = fmt.replace(<span class="built_in">RegExp</span>.$<span class="number">1</span>, (<span class="built_in">RegExp</span>.$<span class="number">1.</span>length == <span class="number">1</span>) ? </span><br><span class="line">                    (o[k]) : ((<span class="string">"00"</span> + o[k]).substr((<span class="string">""</span> + o[k]).length)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fmt;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Date</span>.prototype.formatDay = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.format(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Date</span>.prototype.formatDay2 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.format(<span class="string">"yyyyMMddhhmmss"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>关于这个时间格式化代码，这段厉害就厉害在于，正则表达式应用的非常炉火纯青。尤其replace那一段，使用捕获括号匹配字符串并记住字符串，用<code>$1</code>表示记住的第一个匹配对象，后面替换也很巧妙，设定好位数，然后字符串拼接，最重要的一步，再使用substr截取字符串，一般情况下我想的就是拼凑，先删都拼，比较好的做法是先拼后删。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/12/JS-日期格式化/" data-id="cjfmpdxg00019wkjic9z4d6q8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-数组排序算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/12/JS-数组排序算法/" class="article-date">
+  <time datetime="2018-03-12T12:18:40.000Z" itemprop="datePublished">2018-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/12/JS-数组排序算法/">数组排序算法.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>以前对于排序，只知道冒泡排序，了解一点快速排序，一直是我的弱点，今天是时候好好攻克一下了<br>参考：<a href="http://louiszhai.github.io/2016/12/23/sort/#冒泡排序" target="_blank" rel="noopener">JS中可能用得到的全部的排序算法</a></p>
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p><img src="/assets/time.png" alt=""></p>
+<h3 id="1、冒泡排序"><a href="#1、冒泡排序" class="headerlink" title="1、冒泡排序"></a>1、冒泡排序</h3><p>冒泡排序需要两个嵌套的循环. 其中, 外层循环移动游标; 内层循环遍历游标及之后(或之前)的元素, 通过两两交换的方式, 每次只确保该内循环结束位置排序正确, 然后内层循环周期结束, 交由外层循环往后(或前)移动游标, 随即开始下一轮内层循环, 以此类推, 直至循环结束.<br><img src="/assets/sort05.gif" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 交换下标a、b对应的数组数值，此方法抽离处理，后面直接使用，不做说明</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exchange</span>(<span class="params">a, b, obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = obj[a];</span><br><span class="line">    obj[a] = obj[b];</span><br><span class="line">    obj[b] = temp;</span><br><span class="line"><span class="comment">//        return obj</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = array.length; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] &lt; array[j]) &#123;</span><br><span class="line">                count++</span><br><span class="line">                exchange(i, j, array)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//count=81</span></span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/sort5_1.png" alt=""></p>
+<h3 id="2、双向冒泡排序"><a href="#2、双向冒泡排序" class="headerlink" title="2、双向冒泡排序"></a>2、双向冒泡排序</h3><p>双向冒泡排序是冒泡排序的一个简易升级版, 又称鸡尾酒排序. 冒泡排序是从低到高(或者从高到低)单向排序, 双向冒泡排序顾名思义就是从两个方向分别排序(通常, 先从低到高, 然后从高到低). 因此它比冒泡排序性能稍好一些.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = array.length; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] &lt; array[j]) &#123;</span><br><span class="line">                exchange(i, j, array)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> k = len - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--) &#123;  <span class="comment">//从一个方向开始循环检查</span></span><br><span class="line">            <span class="keyword">if</span> (array[i] &lt; array[k])&#123;</span><br><span class="line"></span><br><span class="line">                exchange(i, k, array)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//  count=81</span></span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3、选择排序"><a href="#3、选择排序" class="headerlink" title="3、选择排序"></a>3、选择排序</h3><p>从算法逻辑上看, 选择排序是一种简单且直观的排序算法. 它也是两层循环. 内层循环就像工人一样, 它是真正做事情的, 内层循环每执行一遍, 将选出本次待排序的元素中最小(或最大)的一个, 存放在数组的起始位置. 而 外层循环则像老板一样, 它告诉内层循环你需要不停的工作, 直到工作完成(也就是全部的元素排序完成).<br><em><strong>Tips</strong></em><br>: 选择排序每次交换的元素都有可能不是相邻的, 因此它有可能打破原来值为相同的元素之间的顺序. 比如数组[2,2,1,3], 正向排序时, 第一个数字2将与数字1交换, 那么两个数字2之间的顺序将和原来的顺序不一致,<strong>虽然它们的值相同, 但它们相对的顺序却发生了变化</strong>. 我们将这种现象称作<code>不稳定性</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 3、选择排序 **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [], min;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = array.length; i &lt; len - <span class="number">1</span>; i++) &#123; <span class="comment">//由于第一个开始跟后面对比，因此只需要对比n-1</span></span><br><span class="line">        min = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = i + <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[min] &gt; array[j]) &#123;</span><br><span class="line">                min = j  <span class="comment">//每一轮循环记下此轮最小值的下标，在后面将此下标值放到数列前面</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        exchange(min, i, array)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/sort06.gif" alt=""></p>
+<p><img src="/assets/sort6_1.png" alt=""></p>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>插入排序的设计初衷是往有序的数组中快速插入一个新的元素. 它的算法思想是: 把要排序的数组分为了两个部分, 一部分是数组的全部元素(除去待插入的元素), 另一部分是待插入的元素; 先将第一部分排序完成, 然后再插入这个元素. 其中第一部分的排序也是通过再次拆分为两部分来进行的.</p>
+<p>插入排序由于操作不尽相同, 可分为 直接插入排序 , 折半插入排序(又称二分插入排序), 链表插入排序 , 希尔排序 .</p>
+<h3 id="4、直接插入排序"><a href="#4、直接插入排序" class="headerlink" title="4、直接插入排序"></a>4、直接插入排序</h3><p>它的基本思想是: 将待排序的元素按照大小顺序, 依次插入到一个已经排好序的数组之中, 直到所有的元素都插入进去.<br>由于直接插入排序每次只移动一个元素的位置, 并不会改变值相同的元素之间的排序, 因此它是一种稳定排序.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 4、直接插入排序 **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>, len = array.length; i &lt; len; i++) &#123; <span class="comment">//直接从第二个开始比较</span></span><br><span class="line">        <span class="keyword">let</span> current = array[i];  <span class="comment">//将这次要比较的值存储起来，作为这一轮循环里面的常量</span></span><br><span class="line">        <span class="keyword">let</span> index = i;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从index前一位数开始比较比较，如果当前比较的数小于它的前一位，则将大的数后移一位</span></span><br><span class="line">        <span class="keyword">while</span> (current &lt; array[index - <span class="number">1</span>] &amp;&amp; index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            array[index] = array[index - <span class="number">1</span>];</span><br><span class="line">            index--;  <span class="comment">//于此同时，下标也前移一位，继续下一次比较</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (index !== i) &#123;  <span class="comment">//防止自己赋值给自己，</span></span><br><span class="line">            array[index] = current <span class="comment">//如果不是自己，则一定是之前后移空出来留给current的位置，插入进去</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/sort07.gif" alt=""></p>
+<h3 id="5、折半插入排序"><a href="#5、折半插入排序" class="headerlink" title="5、折半插入排序"></a>5、折半插入排序</h3><p>折半插入排序是直接插入排序的升级版. 鉴于插入排序第一部分为已排好序的数组, 我们不必按顺序依次寻找插入点, 只需比较它们的中间值与待插入元素的大小即可.</p>
+<p>说白一点就是从第二个数开始向前比较，前面的数（已经排好序）分成两半，找到中间的数，比较大小，然后在向中间循环，一直找到介于两者之间的，然后把之后的后移，将此值插入到后移留出来的位置。</p>
+<p>和直接插入法相比，少了一半数据量的对比。</p>
+<p>算法基本思想是:</p>
+<ol>
+<li>取0 ~ i-1的中间点( m = (i-1)&gt;&gt;1 ), array[i] 与 array[m] 进行比较, 若array[i] &lt; array[m] , 则说明待插入的元素array[i] 应该处于数组的 0 ~ m 索引之间; 反之, 则说明它应该处于数组的 m ~ i-1 索引之间.</li>
+<li>重复步骤1, 每次缩小一半的查找范围, 直至找到插入的位置.</li>
+<li>将数组中插入位置之后的元素全部后移一位.</li>
+<li>在指定位置插入第 i 个元素.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 5、折半插入排序 **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>, len = array.length; i &lt; len; i++) &#123; <span class="comment">//直接从第二个开始比较 i=1</span></span><br><span class="line">        <span class="keyword">let</span> low = <span class="number">0</span>, high = i - <span class="number">1</span>, current = array[i];</span><br><span class="line">        <span class="comment">//找中值对应的下标</span></span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line"><span class="comment">//                let m = Math.floor((low+high) / 2);</span></span><br><span class="line">            <span class="keyword">let</span> m = (low + high) &gt;&gt; <span class="number">1</span>;   <span class="comment">//x&gt;&gt;1 是位运算中的右移运算, 表示右移一位, 等同于x除以2再取整, 即 x&gt;&gt;1 == Math.floor(x/2) .</span></span><br><span class="line">            <span class="keyword">if</span> (array[i] &lt;= array[m]) &#123;</span><br><span class="line">                high = m - <span class="number">1</span>   <span class="comment">//保证low&lt;=high顺利成立，将high定位低半区</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                low = m + <span class="number">1</span>     <span class="comment">//同理</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将在要插入值位置之后的所有元素后移，留出插入的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &gt; low; j--) &#123;</span><br><span class="line">            array[j] = array[j - <span class="number">1</span>];</span><br><span class="line">            <span class="built_in">console</span>.log(array)</span><br><span class="line">        &#125;</span><br><span class="line">        array[low] = current  <span class="comment">//插入</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6、希尔排序"><a href="#6、希尔排序" class="headerlink" title="6、希尔排序"></a>6、希尔排序</h3><p>希尔排序也称缩小增量排序, 它是直接插入排序的另外一个升级版, 实质就是分组插入排序. 希尔排序以其设计者希尔(Donald Shell)的名字命名, 并于1959年公布.</p>
+<p>算法的基本思想:</p>
+<ol>
+<li>将数组拆分为若干个子分组, 每个分组由相距一定”增量”的元素组成. 比方说将[0,1,2,3,4,5,6,7,8,9,10]的数组拆分为”增量”为5的分组, 那么子分组分别为 [0,5], [1,6], [2,7], [3,8], [4,9] 和 [5,10].</li>
+<li>然后对每个子分组应用直接插入排序.</li>
+<li>逐步减小”增量”, 重复步骤1,2.</li>
+<li>直至”增量”为1, 这是最后一个排序, 此时的排序, 也就是对全数组进行直接插入排序.</li>
+</ol>
+<p>示意图：<br><img src="/assets/sort04.png" alt=""></p>
+<p>可见, 希尔排序实际上就是不断的进行直接插入排序, 分组是为了先将局部元素有序化. 因为直接插入排序在元素基本有序的状态下, 效率非常高. 而希尔排序呢, 通过先分组后排序的方式, 制造了直接插入排序高效运行的场景. 因此希尔排序效率更高.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 6、希尔排序 **/</span></span><br><span class="line"><span class="comment">//封装直接插入排序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dirSort</span>(<span class="params">array, grap</span>) </span>&#123;</span><br><span class="line">    grap = <span class="built_in">arguments</span>[<span class="number">1</span>] ? grap : <span class="number">1</span>;  <span class="comment">//如果grap传值了，则为grap传入的值，如果没有，则从1开始</span></span><br><span class="line"><span class="comment">//        debugger;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = grap - <span class="number">1</span>, len = array.length; i &lt; len; i++) &#123; <span class="comment">//直接从第grap-1个开始比较</span></span><br><span class="line">        <span class="keyword">let</span> current = array[i];  <span class="comment">//将这次要比较的值存储起来，作为这一轮循环里面的常量</span></span><br><span class="line">        <span class="keyword">let</span> index = i;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//只比较分组内的最大步长间距的两个数，循环一次就跳出来</span></span><br><span class="line">        <span class="keyword">while</span> (current &lt; array[index - grap] &amp;&amp; index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            array[index] = array[index - grap];  <span class="comment">//如果当前比较的数小于它的前一位，则将大的数后移一位</span></span><br><span class="line">            index -= grap;    <span class="comment">//于此同时，下标也前移grap，继续下一次比较</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index !== i) &#123;  <span class="comment">//防止自己赋值给自己，</span></span><br><span class="line">            array[index] = current; <span class="comment">//如果不是自己，则一定是之前后移空出来留给current的位置，插入进去</span></span><br><span class="line">            <span class="built_in">console</span>.log(array)</span><br><span class="line"><span class="comment">//                debugger</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> gra = array.length &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (gra &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        dirSort(array, gra);</span><br><span class="line">        gra = gra &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7、快速排序"><a href="#7、快速排序" class="headerlink" title="7、快速排序"></a>7、快速排序</h3><p>这是一种使用非常广泛的排序，典型的代表就是Chrome的v8引擎为了高效排序, 在排序数据超过了10条时, 便会采用快速排序. 对于10条及以下的数据采用的便是插入排序</p>
+<p>快速排序”的思想很简单，整个排序过程只需要三步：<br>（1）在数据集之中，选择一个元素作为”基准”（pivot）。<br>（2）所有小于”基准”的元素，都移到”基准”的左边；所有大于”基准”的元素，都移到”基准”的右边。<br>（3）对”基准”左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止。<br><img src="/assets/sort09.gif" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 7、快速排序 **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array.length &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//选取基准点，基准点选取的好坏决定了排序速度的好坏，目前没有好的方法，一般居中选取</span></span><br><span class="line">        <span class="keyword">let</span> baseIndex = array.length &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> left = [], right = [];  <span class="comment">//定义基准点左右两边数组，小的都在左边，大的都在右边</span></span><br><span class="line">        <span class="comment">// 循环判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i !== baseIndex) &#123;       <span class="comment">//这一步很关键，一定不能把自身算进去</span></span><br><span class="line">                <span class="keyword">if</span> (array[i] &lt; array[baseIndex]) &#123;</span><br><span class="line">                    left.push(array[i])</span><br><span class="line">                &#125; <span class="keyword">else</span></span><br><span class="line">                    right.push(array[i])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//          最关键的一步：递归调用然后在用数组拼接</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(left).concat(array[baseIndex], <span class="built_in">arguments</span>.callee(right))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/sort9_1.png" alt=""></p>
+<h3 id="8、归并排序"><a href="#8、归并排序" class="headerlink" title="8、归并排序"></a>8、归并排序</h3><p>归并排序建立在归并操作之上, 它采取分而治之的思想, 将数组拆分为两个子数组, 分别排序, 最后才将两个子数组合并; 拆分的两个子数组, 再继续递归拆分为更小的子数组, 进而分别排序, 直到数组长度为1, 直接返回该数组为止.</p>
+<p><img src="/assets/sort08.gif" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 8、归并排序 **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array.length &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> res = [];</span><br><span class="line">        <span class="comment">//上半部分拆分数组，</span></span><br><span class="line">        <span class="keyword">let</span> baseIndex = array.length &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> left = array.slice(<span class="number">0</span>, baseIndex),</span><br><span class="line">            right = array.slice(baseIndex);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//合并数组，</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">                <span class="keyword">let</span> item = left[<span class="number">0</span>] &lt;= right[<span class="number">0</span>] ? left.shift() : right.shift();</span><br><span class="line">                res.push(item);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> res.concat(left.length ? left : right);  <span class="comment">//返回排好数组</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//递归调用，一边拆分，一边合并</span></span><br><span class="line">        <span class="keyword">return</span> merge(<span class="built_in">arguments</span>.callee(left), <span class="built_in">arguments</span>.callee(right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/sort8_1.png" alt=""></p>
+<h3 id="9、堆排序"><a href="#9、堆排序" class="headerlink" title="9、堆排序"></a>9、堆排序</h3><h3 id="10、计数排序"><a href="#10、计数排序" class="headerlink" title="10、计数排序"></a>10、计数排序</h3><p>计数排序利用了一个特性, 对于数组的某个元素, 一旦知道了有多少个其它元素比它小(假设为m个), 那么就可以确定出该元素的正确位置(第m+1位)</p>
+<ol>
+<li>获取待排序数组A的最大值, 最小值.</li>
+<li>将最大值与最小值的差值+1作为长度新建计数数组B，并将相同元素的数量作为值存入计数数组.</li>
+<li>对计数数组B累加计数, 存储不同值的初始下标.</li>
+<li>从原数组A挨个取值, 赋值给一个新的数组C相应的下标, 最终返回数组C.</li>
+</ol>
+<p><img src="/assets/sort10.gif" alt=""></p>
+<h3 id="11、桶排序"><a href="#11、桶排序" class="headerlink" title="11、桶排序"></a>11、桶排序</h3><p>桶排序即所谓的箱排序, 它是将数组分配到有限数量的桶子里. 每个桶里再各自排序(因此有可能使用别的排序算法或以递归方式继续桶排序). 当每个桶里的元素个数趋于一致时, 桶排序只需花费O(n)的时间. 桶排序通过空间换时间的方式提高了效率, 因此它需要额外的存储空间(即桶的空间).</p>
+<h3 id="12、基数排序"><a href="#12、基数排序" class="headerlink" title="12、基数排序"></a>12、基数排序</h3><p>基数排序源于老式穿孔机, 排序器每次只能看到一个列. 它是基于元素值的每个位上的字符来排序的. 对于数字而言就是分别基于个位, 十位, 百位 或千位等等数字来排序. (不明白不要紧, 我也不懂, 请接着往下读)<img src="/assets/sort12.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/12/JS-数组排序算法/" data-id="cjfmpdxfu0017wkjirkeih3w8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-数组、字符串中最大、重复元素查找" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/JS-数组、字符串中最大、重复元素查找/" class="article-date">
+  <time datetime="2018-03-08T12:17:40.000Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/08/JS-数组、字符串中最大、重复元素查找/">找最大值、重复元素.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一维数组中寻找最大值"><a href="#一维数组中寻找最大值" class="headerlink" title="一维数组中寻找最大值"></a>一维数组中寻找最大值</h3><p>let array=[……]</p>
+<h4 id="1、for循环遍历"><a href="#1、for循环遍历" class="headerlink" title="1、for循环遍历"></a>1、for循环遍历</h4><p>for循环是最直接的方法，但也是时间复杂度最高的方法。O(n)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">5</span>, <span class="number">7</span>, <span class="number">89</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">let</span> max = array[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    max = (max &gt;= array[i]) ? max : array[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(max);  <span class="comment">//89</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、Math-max"><a href="#2、Math-max" class="headerlink" title="2、Math.max"></a>2、Math.max</h4><p>推荐的方法，但是要注意<code>Math.max()</code>对象中传递的单个参数，不能传递整个数组，此时便需要用apply方法将数据对象转化为单个参数对象。这种算法的时间负责度为多少？？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">5</span>, <span class="number">7</span>, <span class="number">89</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">let</span> max = <span class="built_in">Math</span>.max.apply(array, array);</span><br><span class="line"><span class="built_in">console</span>.log(max);  <span class="comment">//89</span></span><br></pre></td></tr></table></figure>
+<p>但是在ES6中，有一个新的API，<strong>扩展运算符…</strong>，将一个数组转为用逗号分隔的参数序列，所以上式还有一个更简单的替代apply的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> max = <span class="built_in">Math</span>.max(...array)</span><br></pre></td></tr></table></figure>
+<p>顺便可以区分一下apply、call、bind之间的区别。<br>call传递的是单个参数：<code>call(this,arg1,arg2,arg3...)</code><br>apply可以传递的是一个数组: <code>apply(this,arguments[])</code><br>bind只传递一个对象:<code>bind(this)</code></p>
+<h4 id="3、Array-sort-排序之后再取最后一位"><a href="#3、Array-sort-排序之后再取最后一位" class="headerlink" title="3、Array.sort()排序之后再取最后一位"></a>3、Array.sort()排序之后再取最后一位</h4><p>这个办法的时间复杂度就是视具体浏览器JS引擎以及数组长度而定了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">5</span>, <span class="number">7</span>, <span class="number">89</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">let</span> newArr= array.sort();</span><br><span class="line"><span class="built_in">console</span>.log(newArr[newArr.length<span class="number">-1</span>]);  <span class="comment">//89</span></span><br></pre></td></tr></table></figure>
+<h3 id="一维数组寻找重复率最高的元素"><a href="#一维数组寻找重复率最高的元素" class="headerlink" title="一维数组寻找重复率最高的元素"></a>一维数组寻找重复率最高的元素</h3><h5 id="使用hash"><a href="#使用hash" class="headerlink" title="使用hash"></a>使用hash</h5><p>让object.key=元素，value=出现次数，遍历对象，找到value中最大值，然后将对应的key值返回就好了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出数组中出现最多的元素</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'a'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>];</span><br><span class="line"><span class="keyword">let</span> res = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历数组，生成keys</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!res[arr[i]]) &#123;</span><br><span class="line">        res[arr[i]] = <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res[arr[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历对象，找出最大的值</span></span><br><span class="line"><span class="comment">//这里使用Object.keys遍历</span></span><br><span class="line"><span class="keyword">let</span> keys = <span class="built_in">Object</span>.keys(res);</span><br><span class="line"><span class="keyword">let</span> maxNum = <span class="number">0</span>, max;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (maxNum &lt; res[keys[i]]) &#123;</span><br><span class="line">        maxNum = res[keys[i]];</span><br><span class="line">        max = keys[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(max)</span><br></pre></td></tr></table></figure>
+<h5 id="使用空间换时间"><a href="#使用空间换时间" class="headerlink" title="使用空间换时间"></a>使用空间换时间</h5><h3 id="找到找到字符串中出现频率最高的字符"><a href="#找到找到字符串中出现频率最高的字符" class="headerlink" title="找到找到字符串中出现频率最高的字符"></a>找到找到字符串中出现频率最高的字符</h3><p>这个问题和在数组中寻找出现频率最高的元素其实是同一个问题，区别在于，一个是字符，一个是数组。遍历的方式不一样而已。</p>
+<p>对于for循环遍历，字符串具有length属性，上面的方法完全适用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/08/JS-数组、字符串中最大、重复元素查找/" data-id="cjfmpdxfr0015wkjizstxf7n2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

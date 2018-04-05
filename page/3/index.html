@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏夏盟主</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="夏夏盟主">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="夏夏盟主">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏夏盟主">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏盟主" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏盟主</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-JS-同源策略到前端跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/JS-同源策略到前端跨域/" class="article-date">
+  <time datetime="2018-03-08T12:16:40.000Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/08/JS-同源策略到前端跨域/">同源策略到前端跨域.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="同源策略到前端跨域"><a href="#同源策略到前端跨域" class="headerlink" title="同源策略到前端跨域"></a>同源策略到前端跨域</h1><p>前言：之前学习源生ajax时，遇到过ajax跨越问题，当时看红宝书知道CROS解决，一直在前端设置，不成功，一直以为是我哪里没有设置好，到后面才发现其实这个解决是需要在服务器端返回信息里面添加返回头<code>Response Header</code>，让浏览器允许访问跨域资源。实际上， 浏览器不会拦截不合法的跨域请求, 而是拦截了他们的响应, 因此即使请求不合法, 很多时候, 服务器依然收到了请求。后面看了<a href="http://louiszhai.github.io/2016/11/02/ajax/#什么是CORS" target="_blank" rel="noopener">路易斯的ajax知识体系</a>又知道了有关ajax跨域还有其他的跨域解决方案，我以为我懂了，但是都没有去验证，直到过了一段时间，再看到这篇博文以及路易斯关于同源策略到前端跨域这边文章时，自己对跨域的了解其实很片面。今天好好总结一下有关跨域的整个由来以及解决方案。</p>
+<h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>同源策略 (Same-Origin Policy) 最早由 Netscape 公司提出, 所谓同源就是要求, 域名, 协议, 端口相同. 非同源的脚本不能访问或者操作其他域的页面对象(如DOM等). 作为著名的安全策略, 虽然它只是一个规范, 并不强制要求, 但现在所有支持 javaScript 的浏览器都会使用这个策略. 以至于该策略成为浏览器最核心最基本的安全功能, 如果缺少了同源策略, web的安全将无从谈起.</p>
+<p>网上的一个栗子：相对 <a href="http://store.company.com/dir/page.html" target="_blank" rel="noopener">http://store.company.com/dir/page.html</a> 同源检测的示例:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">结果</th>
+<th style="text-align:left">原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://store.company.com/dir/inner/another.html" target="_blank" rel="noopener">http://store.company.com/dir/inner/another.html</a></td>
+<td style="text-align:left">成功</td>
+<td style="text-align:left">同一域名</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://store.company.com/dir2/other.html" target="_blank" rel="noopener">http://store.company.com/dir2/other.html</a></td>
+<td style="text-align:left">成功</td>
+<td style="text-align:left">同一域名下不同文件夹</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://store.company.com/secure.html" target="_blank" rel="noopener">https://store.company.com/secure.html</a></td>
+<td style="text-align:left">失败</td>
+<td style="text-align:left">不同的协议 ( https )</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://store.company.com:81/dir/etc.html" target="_blank" rel="noopener">http://store.company.com:81/dir/etc.html</a></td>
+<td style="text-align:left">失败</td>
+<td style="text-align:left">不同的端口 ( 81 )</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://news.company.com/dir/other.html" target="_blank" rel="noopener">http://news.company.com/dir/other.html</a></td>
+<td style="text-align:left">失败</td>
+<td style="text-align:left">不同的主机 ( news )</td>
+</tr>
+</tbody>
+</table>
+<p>同源策略要求三同, 即:<strong>同域</strong>,<strong>同协议</strong>,<strong>同端口</strong>.</p>
+<ul>
+<li>同域即host相同, 顶级域名, 一级域名, 二级域名, 三级域名等必须相同, 且域名不能与 ip 对应;</li>
+<li>同协议要求, http与https协议必须保持一致;</li>
+<li>同端口要求, 端口号必须相同.</li>
+</ul>
+<p>在浏览器中，<code>&lt;script&gt;、&lt;img&gt;、&lt;iframe&gt;、&lt;link&gt;</code>等标签都可以加载跨域资源，而不受同源限制，但浏览器限制了JavaScript的权限使其不能读、写加载的内容。</p>
+<h2 id="跨域访问"><a href="#跨域访问" class="headerlink" title="跨域访问"></a>跨域访问</h2><p>关于解决跨域访问的方法， 一共收集到以下几种，CROS，取消浏览器安全校验，JSONP实际操作过，其他的方法来源于网络，并没有验证。</p>
+<h3 id="1、主域相同的跨域"><a href="#1、主域相同的跨域" class="headerlink" title="1、主域相同的跨域"></a>1、主域相同的跨域</h3><h4 id="1-1、document-domain"><a href="#1-1、document-domain" class="headerlink" title="1.1、document.domain"></a>1.1、<strong>document.domain</strong></h4><blockquote>
+<p><strong>document.domain</strong>的场景只适用于不同子域的框架间的交互，及主域必须相同的不同源。</p>
+</blockquote>
+<p>通过修改document的domain属性，我们可以在域和子域或者不同的子域之间通信(即它们必须在同一个一级域名下). 同域策略认为域和子域隶属于不同的域，比如a.com和 script.a.com是不同的域，这时，我们无法在a.com下的页面中调用script.a.com中定义的JavaScript方法。但是当我们把它们document的domain属性都修改为a.com，浏览器就会认为它们处于同一个域下，那么我们就可以互相获取对方数据或者操作对方DOM了。</p>
+<p>比如, 我们在 <a href="http://www.a.com/a.html" target="_blank" rel="noopener">www.a.com/a.html</a> 下, 现在想获取 <a href="http://www.script.a.com/b.html" target="_blank" rel="noopener">www.script.a.com/b.html</a>, 即主域名相同, 二级域名不同. 那么可以这么做:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain = <span class="string">'a.com'</span>;</span><br><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</span><br><span class="line">iframe.src = <span class="string">'http://www.script.a.com/b.html'</span>;</span><br><span class="line">iframe.style.display = <span class="string">'none'</span>;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(iframe);</span><br><span class="line">iframe.addEventListener(<span class="string">'load'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//TODO 载入完成时做的事情</span></span><br><span class="line">    <span class="comment">//var _document = iframe.contentWindow.document;</span></span><br><span class="line">     <span class="comment">//...</span></span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：浏览器单独保存端口号。任何的赋值操作，包括document.domain = document.domain都会以null值覆盖掉原来的端口号。因此，赋值时必须带上端口号，确保端口号不会为null.</p>
+</blockquote>
+<hr>
+<h3 id="2、完全不同源的跨域（两个页面之间的通信）"><a href="#2、完全不同源的跨域（两个页面之间的通信）" class="headerlink" title="2、完全不同源的跨域（两个页面之间的通信）"></a>2、完全不同源的跨域（两个页面之间的通信）</h3><h4 id="2-1-通过location-hash跨域"><a href="#2-1-通过location-hash跨域" class="headerlink" title="2.1 通过location.hash跨域"></a>2.1 通过location.hash跨域</h4><p>假设域名a.com下的文件cs1.html要和jianshu.com域名下的cs2.html传递信息。<br>1、cs1.html首先创建自动创建一个隐藏的iframe，iframe的src指向jianshu.com域名下的cs2.html页面。<br>2、cs2.html响应请求后再将通过修改cs1.html的hash值来传递数据。<br>3、同时在cs1.html上加一个定时器，隔一段时间来判断location.hash的值有没有变化，一旦有变化则获取获取hash值。</p>
+<blockquote>
+<p>注：由于两个页面不在同一个域下IE、Chrome不允许修改parent.location.hash的值，所以要借助于a.com域名下的一个代理iframe。</p>
+</blockquote>
+<p>优点：1.可以解决域名完全不同的跨域。2.可以实现双向通讯。<br>缺点：location.hash会直接暴露在URL里，并且在一些浏览器里会产生历史记录，数据安全性不高也影响用户体验。另外由于URL大小的限制，支持传递的数据量也不大。有些浏览器不支持onhashchange事件，需要轮询来获知URL的变化。</p>
+<h4 id="2-2通过window-name跨域"><a href="#2-2通过window-name跨域" class="headerlink" title="2.2通过window.name跨域"></a>2.2通过window.name跨域</h4><p>window对象有个name属性，该属性有个特征：即在一个窗口(window)的生命周期内,窗口载入的所有的页面都是共享一个window.name的，每个页面对window.name都有读写的权限，window.name是持久存在一个窗口载入过的所有页面中的。window.name属性的神奇之处在于name 值在不同的页面（甚至不同域名）加载后依旧存在（如果没修改则值不会变化），并且可以支持非常长的 name 值（2MB）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">window.name = data;//父窗口先打开一个子窗口，载入一个不同源的网页，该网页将信息写入。        </span><br><span class="line">location = &apos;http://parent.url.com/xxx.html&apos;;//接着，子窗口跳回一个与主窗口同域的网址。</span><br><span class="line">var data = document.getElementById(&apos;myFrame&apos;).contentWindow.name。//然后，主窗口就可以读取子窗口的window.name了。</span><br></pre></td></tr></table></figure>
+<p>如果是与iframe通信的场景就需要把iframe的src设置成当前域的一个页面地址。</p>
+<p>这个方式非常适合单向的数据请求，而且协议简单、安全. 不会像JSONP那样不做限制地执行外部脚本.</p>
+<h4 id="2-3、通过window-postMessage跨域"><a href="#2-3、通过window-postMessage跨域" class="headerlink" title="2.3、通过window.postMessage跨域"></a>2.3、通过window.postMessage跨域</h4><p>ES5新增的 postMessage() 方法允许来自不同源的脚本采用异步方式进行有限的通信，可以实现跨文本档、多窗口、跨域消息传递.</p>
+<p>语法: postMessage(data,origin)</p>
+<p><strong>data</strong>: 要传递的数据，html5规范中提到该参数可以是JavaScript的任意基本类型或可复制的对象，然而并不是所有浏览器都做到了这点儿，部分浏览器只能处理字符串参数，所以我们在传递参数的时候建议使用JSON.stringify()方法对对象参数序列化，在低版本IE中引用json2.js可以实现类似效果.</p>
+<p><strong>origin</strong>：字符串参数，指明目标窗口的源，协议+主机+端口号[+URL]，URL会被忽略，所以可以不写，这个参数是为了安全考虑，postMessage()方法只会将message传递给指定窗口，当然如果愿意也可以建参数设置为”*”，这样可以传递给任意窗口，如果要指定和当前窗口同源的话设置为”/“。</p>
+<p>父窗口和子窗口都可以通过message事件，监听对方的消息。message事件的事件对象event，提供以下三个属性：</p>
+<ul>
+<li>1、event.source：发送消息的窗口。</li>
+<li>2、event.origin： 消息发向的网址。</li>
+<li>3、event.data：消息内容。</li>
+</ul>
+<p>父页面发送消息:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames[<span class="number">0</span>].postMessage(<span class="string">'message'</span>, origin)</span><br></pre></td></tr></table></figure>
+<p>iframe接受消息:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(e.source!=<span class="built_in">window</span>.parent) <span class="keyword">return</span>;<span class="comment">//若消息源不是父页面则退出</span></span><br><span class="line">      <span class="comment">//TODO ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="2-4、Access-Control"><a href="#2-4、Access-Control" class="headerlink" title="2.4、Access Control"></a>2.4、Access Control</h4><p>此跨域方法目前只在很少的浏览器中得以支持, 这些浏览器可以发送一个跨域的HTTP请求（Firefox, Google Chrome等通过XMLHTTPRequest实现, IE8下通过XDomainRequest实现）, 请求的响应必须包含一个Access- Control-Allow-Origin的HTTP响应头, 该响应头声明了请求域的可访问权限. 例如baidu.com对google.com下的getUsers.php发送了一个跨域的HTTP请求（通过ajax）, 那么getUsers.php必须加入如下的响应头:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Access-Control-Allow-Origin: http://www.baidu.com"</span>);<span class="comment">//表示允许baidu.com跨域请求本文件</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-5、flash-URLLoder"><a href="#2-5、flash-URLLoder" class="headerlink" title="2.5、flash URLLoder"></a>2.5、flash URLLoder</h4><p>flash有自己的一套安全策略, 服务器可以通过crossdomain.xml文件来声明能被哪些域的SWF文件访问, SWF也可以通过API来确定自身能被哪些域的SWF加载. 当跨域访问资源时, 例如从域 a.com 请求域 b.com上的数据, 我们可以借助flash来发送HTTP请求.</p>
+<ul>
+<li>首先, 修改域 b.com上的 crossdomain.xml(一般存放在根目录, 如果没有需要手动创建) , 把 a.com 加入到白名单;</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">cross-domain-policy</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">site-control</span> <span class="attr">permitted-cross-domain-policies</span>=<span class="string">"by-content-type"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">allow-access-from</span> <span class="attr">domain</span>=<span class="string">"a.com"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cross-domain-policy</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其次, 通过Flash URLLoader发送HTTP请求, 拿到请求后并返回;</li>
+<li>最后, 通过Flash API把响应结果传递给JavaScript.</li>
+</ul>
+<p>Flash URLLoader是一种很普遍的跨域解决方案，不过需要支持iOS的话，这个方案就不可行了.</p>
+<h4 id="2-6、使用代理"><a href="#2-6、使用代理" class="headerlink" title="2.6、使用代理"></a>2.6、使用代理</h4><p>虽然ajax和iframe受同源策略限制, 但服务器端代码请求, 却不受此限制, 我们可以基于此去伪造一个同源请求, 实现跨域的访问. 如下便是实现思路:</p>
+<ol>
+<li>请求同域下的web服务器;</li>
+<li>web服务器像代理一样去请求真正的第三方服务器;</li>
+<li>代理拿到数据过后, 直接返回给客户端ajax. 这样, 我们便拿到了跨域数据.</li>
+</ol>
+<p>但是这种方法成本高，操作麻烦，不推荐</p>
+<h3 id="3、Ajax请求不同源的跨域跨域"><a href="#3、Ajax请求不同源的跨域跨域" class="headerlink" title="3、Ajax请求不同源的跨域跨域"></a>3、Ajax请求不同源的跨域跨域</h3><h4 id="3-1、通过CROS跨域"><a href="#3-1、通过CROS跨域" class="headerlink" title="3.1、通过CROS跨域"></a>3.1、通过CROS跨域</h4><p>CORS是一个W3C(World Wide Web)标准, 全称是跨域资源共享(Cross-origin resource sharing).它允许浏览器向跨域服务器, 发出异步http请求, 从而克服了ajax受同源策略的限制. 实际上, 浏览器不会拦截不合法的跨域请求, 而是拦截了他们的响应, 因此即使请求不合法, 很多时候, 服务器依然收到了请求.(Chrome和Firefox下https网站不允许发送http异步请求除外)</p>
+<p>简而言之, 浏览器不再一味禁止跨域访问, 而是检查目的站点的响应头域, 进而判断是否允许当前站点访问. 通常, 服务器使用以下的这些响应头域用来通知浏览器:</p>
+<blockquote>
+<ul>
+<li><p>Access-Control-Allow-Origin: 指定允许哪些源的网页发送请求.</p>
+</li>
+<li><p>Access-Control-Allow-Credentials: 指定是否允许cookie发送.</p>
+</li>
+<li><p>Access-Control-Allow-Methods: 指定允许哪些请求方法.</p>
+</li>
+<li><p>Access-Control-Allow-Headers: 指定允许哪些常规的头域字段, 比如说 Content-Type.</p>
+</li>
+<li><p>Access-Control-Expose-Headers: 指定允许哪些额外的头域字段, 比如说 X-Custom-Header.</p>
+</li>
+<li><p>Access-Control-Max-Age: 指定preflight OPTIONS请求的有效期, 单位为秒.</p>
+</li>
+</ul>
+</blockquote>
+<h5 id="CORS请求分为两种-①-简单请求-②-非简单请求"><a href="#CORS请求分为两种-①-简单请求-②-非简单请求" class="headerlink" title="CORS请求分为两种, ① 简单请求; ② 非简单请求."></a>CORS请求分为两种, ① 简单请求; ② 非简单请求.</h5><p>满足如下两个条件便是简单请求, 反之则为非简单请求.(CORS请求部分摘自阮一峰老师博客)</p>
+<p>1) 请求是以下三种之一:</p>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+<p>2) http头域不超出以下几种字段:</p>
+<ul>
+<li>Accept  </li>
+<li>Accept-Language  </li>
+<li>Content-Language  </li>
+<li>Last-Event-ID  </li>
+<li>Content-Type字段限三个值 application/x-www-form-urlencoded、multipart/form-data、text/plain</li>
+</ul>
+<h5 id="3-1-1-简单请求"><a href="#3-1-1-简单请求" class="headerlink" title="3.1.1 简单请求"></a>3.1.1 简单请求</h5><p>浏览器将发送一次http请求, 同时在Request头域中增加 Origin 字段, 用来标示请求发起的源, 服务器根据这个源采取不同的响应策略. 若服务器认为该请求合法, 那么需要往返回的 HTTP Response 中添加 Access-Control-_ 等字段._</p>
+<p>一个栗子：假如站点 <a href="http://foo.example" target="_blank" rel="noopener">http://foo.example</a> 的网页应用想要访问 <a href="http://bar.other" target="_blank" rel="noopener">http://bar.other</a> 的资源。以下的 JavaScript 代码应该会在 foo.example 上执行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//foo.example</span></span><br><span class="line"><span class="keyword">var</span> invocation = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://bar.other/resources/public-data/'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callOtherDomain</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(invocation) &#123;    </span><br><span class="line">    invocation.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">    invocation.onreadystatechange = handler;</span><br><span class="line">    invocation.send(); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/CROS.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//让我们看看，在这个场景中，浏览器会发送什么的请求到服务器，而服务器又会返回什么给浏览器：</span><br><span class="line">GET /resources/public-data/ HTTP/1.1</span><br><span class="line">Host: bar.other</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 </span><br><span class="line">Minefield/3.1b3pre</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: en-us,en;q=0.5</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Referer: http://foo.example/examples/access-control/simpleXSInvocation.html</span><br><span class="line">Origin: http://foo.example //该请求来自于 http://foo.exmaple。</span><br><span class="line">//以上是浏览器发送请求</span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 01 Dec 2008 00:23:53 GMT</span><br><span class="line">Server: Apache/2.0.61 </span><br><span class="line">Access-Control-Allow-Origin: * //这表明服务器接受来自任何站点的跨站请求。如果设置为http://foo.example。其它站点就不能跨站访问 http://bar.other 的资源了。</span><br><span class="line">Keep-Alive: timeout=2, max=100</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Type: application/xml</span><br><span class="line">//以上是服务器返回信息给浏览器</span><br></pre></td></tr></table></figure>
+<p>通过使用 Origin 和 Access-Control-Allow-Origin 就可以完成最简单的跨站请求。不过服务器需要把 Access-Control-Allow-Origin 设置为 * 或者包含由 Origin 指明的站点。</p>
+<h5 id="3-1-2-非简单请求-预请求"><a href="#3-1-2-非简单请求-预请求" class="headerlink" title="3.1.2 非简单请求(预请求)"></a>3.1.2 非简单请求(预请求)</h5><p>当请求具备以下条件，就会被当成预请求（非简单请求）处理：</p>
+<p>（1）请求以 GET, HEAD 或者 POST 以外的方法发起请求。或者，使用 POST，但请求数据为 application/x-www-form-urlencoded, multipart/form-data 或者 text/plain 以外的数据类型。比如说，用 POST 发送数据类型为 application/xml 或者 text/xml 的 XML 数据的请求。</p>
+<p>（2）使用自定义请求头（比如添加诸如 X-PINGOTHER）<br>对于非简单请求，浏览器将发送两次http请求. 第一次为preflight预检(Method: OPTIONS),主要验证来源是否合法. 值得注意的是:OPTION请求响应头同样需要包含 Access-Control-* 字段等. 第二次才是真正的HTTP请求. 所以服务器必须处理OPTIONS应答(通常需要返回20X的状态码, 否则xhr.onerror事件将被触发).</p>
+<p>一个例子：使用了自定义请求头的非简单请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> invocation = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://bar.other/resources/post-here/'</span>;</span><br><span class="line"><span class="keyword">var</span> body = <span class="string">'&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;&#123;C&#125;Arun'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callOtherDomain</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(invocation)&#123;</span><br><span class="line">    invocation.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);</span><br><span class="line">    invocation.setRequestHeader(<span class="string">'X-PINGOTHER'</span>, <span class="string">'pingpong'</span>);</span><br><span class="line">    invocation.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/xml'</span>);</span><br><span class="line">    invocation.onreadystatechange = handler;</span><br><span class="line">    invocation.send(body); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以 XMLHttpRequest 创建了一个 POST 请求，为该请求添加了一个自定义请求头(X-PINGOTHER: pingpong)，并指定数据类型为 application/xml。所以，该请求是一个“预请求”形式的跨站请求。浏览器使用一个 OPTIONS 发送了一个“预请求”。</p>
+<p>假设服务器成功响应返回部分信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://foo.example //表明服务器允许http://foo.example的请求</span><br><span class="line">Access-Control-Allow-Methods: POST, GET, OPTIONS //表明服务器可以接受POST, GET和 OPTIONS的请求方法</span><br><span class="line">Access-Control-Allow-Headers: X-PINGOTHER //传递一个可接受的自定义请求头列表。服务器也需要设置一个与浏览器对应。否则会报 Request header field X-Requested-With is not allowed by Access-Control-Allow-Headers in preflight response 的错误</span><br><span class="line">Access-Control-Max-Age: 1728000 //告诉浏览器，本次“预请求”的响应结果有效时间是多久。在上面的例子里，1728000秒代表着20天内，浏览器在处理针对该服务器的跨站请求，都可以无需再发送“预请求”，只需根据本次结果进行判断处理。</span><br></pre></td></tr></table></figure>
+<h5 id="3-1-3-附带凭证信息的请求"><a href="#3-1-3-附带凭证信息的请求" class="headerlink" title="3.1.3 附带凭证信息的请求"></a>3.1.3 附带凭证信息的请求</h5><p>XMLHttpRequest 和访问控制功能，最有趣的特性就是，发送凭证请求（HTTP Cookies和验证信息）的功能。一般而言，对于跨站请求，浏览器是不会发送凭证信息的。但如果将 XMLHttpRequest 的一个特殊标志位withCredentials设置为true，浏览器就将允许该请求的发送。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//http://foo.example站点的脚本向http://bar.other站点发送一个GET请求，并设置了一个Cookies值。脚本代码如下：</span></span><br><span class="line"><span class="keyword">var</span> invocation = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://bar.other/resources/credentialed-content/'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callOtherDomain</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(invocation) &#123;</span><br><span class="line">    invocation.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">    invocation.withCredentials = <span class="literal">true</span>;</span><br><span class="line">    invocation.onreadystatechange = handler;</span><br><span class="line">    invocation.send(); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第七行代码将 XMLHttpRequest 的withCredentials标志设置为true，从而使得Cookies可以随着请求发送。因为这是一个简单的GET请求，所以浏览器不会发送一个“预请求”。但是，如果服务器端的响应中，如果没有返回Access-Control-Allow-Credentials： true的响应头，那么浏览器将不会把响应结果传递给发出请求的脚本程序，以保证信息的安全。</p>
+<p>假设服务器成功响应返回部分信息应该如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://foo.example</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Set-Cookie: pageAccess=3; expires=Wed, 31-Dec-2008 01:34:53 GMT</span><br></pre></td></tr></table></figure>
+<p>如果bar.other的响应头里没有Access-Control-Allow-Credentials：true，则响应会被忽略.。</p>
+<blockquote>
+<p><strong>特别注意:</strong></p>
+<p>给一个带有withCredentials的请求发送响应的时候，服务器端必须指定允许请求的域名,不能使用“*”。上面这个例子中，如果响应头是这样的 Access-Control-Allow-Origin：* ，则响应会失败。</p>
+</blockquote>
+<h4 id="3-2、-JSONP跨域"><a href="#3-2、-JSONP跨域" class="headerlink" title="3.2、 JSONP跨域"></a>3.2、 JSONP跨域</h4><p>基本原理：网页通过添加一个<code>&lt;script&gt;</code>元素，向服务器请求JSON数据，这种做法不受同源政策限制；服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。例子如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todo</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The author is: '</span>+ data.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">script.src = <span class="string">'http://www.jianshu.com/author?callback=todo'</span>;<span class="comment">//向服务器www.jianshu.com发出请求。注意，该请求的查询字符串有一个callback参数，用来指定回调函数的名字。</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line"><span class="comment">//服务器收到这个请求以后，会将数据放在回调函数的参数位置返回。</span></span><br><span class="line">todo(&#123;<span class="string">"name"</span>: <span class="string">"fewjq"</span>&#125;);</span><br><span class="line"><span class="comment">//由于&lt;script&gt;元素请求的脚本，直接作为代码运行。这时，只要浏览器定义了todo函数，该函数就会立即调用。作为参数的JSON数据被视为JavaScript对象。</span></span><br></pre></td></tr></table></figure>
+<p>优点：简单适用，老式浏览器全部支持，服务器改造小。不需要XMLHttpRequest或ActiveX的支持。</p>
+<p>缺点：只支持GET请求。</p>
+<h4 id="3-3、WebSocket跨域"><a href="#3-3、WebSocket跨域" class="headerlink" title="3.3、WebSocket跨域"></a>3.3、WebSocket跨域</h4><p>WebSocket 本质上是一个基于TCP的协议, 它的目标是在一个单独的持久链接上提供全双工(full-duplex), 双向通信, 以基于事件的方式, 赋予浏览器实时通信能力. 既然是双向通信, 就意味着服务器端和客户端可以同时发送并响应请求, 而不再像HTTP的请求和响应. (同源策略对 web sockets 不适用)</p>
+<p>原理: 为了建立一个WebSocket连接，客户端浏览器首先要向服务器发起一个HTTP请求, 这个请求和通常的HTTP请求不同, 包含了一些附加头信息, 其中附加头信息”Upgrade: WebSocket”表明这是一个申请协议升级的HTTP请求, 服务器端解析这些附加的头信息然后产生应答信息返回给客户端, 客户端和服务器端的WebSocket连接就建立起来了, 双方就可以通过这个连接通道自由的传递信息, 并且这个连接会持续存在直到客户端或者服务器端的某一方主动的关闭连接.</p>
+<h4 id="3-4、Comet跨域"><a href="#3-4、Comet跨域" class="headerlink" title="3.4、Comet跨域"></a>3.4、Comet跨域</h4><p>在WebSocket出现之前, 很多网站为了实现实时推送技术, 通常采用的方案是轮询(Polling)和Comet技术, Comet又可细分为两种实现方式, 一种是长轮询机制, 一种称为流技术, 这两种方式实际上是对轮询技术的改进, 这些方案带来很明显的缺点, 需要由浏览器对服务器发出HTTP request, 大量消耗服务器带宽和资源. 面对这种状况, HTML5定义了WebSocket协议, 能更好的节省服务器资源和带宽并实现真正意义上的实时推送.</p>
+<blockquote>
+<p><img src="/assets/comet.png" alt=""></p>
+</blockquote>
+<h4 id="3-5、图像ping跨域"><a href="#3-5、图像ping跨域" class="headerlink" title="3.5、图像ping跨域"></a>3.5、图像ping跨域</h4><p>图像ping跨域请求技术是使用 &lt;img&gt; 标签。我们知道，一个网页可以从任何网页中加载图像，不<br>用担心跨域不跨域。</p>
+<p><img src="/assets/img-ping.png" alt="">图像ping有两个主要的缺点，1、只能发送GET请求；2、无法访问服务器相应文本</p>
+<h4 id="3-6、浏览器解除安全控制，允许跨域"><a href="#3-6、浏览器解除安全控制，允许跨域" class="headerlink" title="3.6、浏览器解除安全控制，允许跨域"></a>3.6、浏览器解除安全控制，允许跨域</h4><p>在实际开发过程中，有时候经常遇到这样一种情况：开发过程中会涉及到跨域问题，前端需要向服务请求某个接口，但是由于不同源，浏览器拦截响应，在上线之后项目便在同一个源，这种情况为了快速开发，可以将浏览器安全检查关闭，允许获取跨域资源。<br>禁止浏览器跨域安全检查（这里以chrome为例）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;C:\Users\UserName\AppData\Local\Google\Chrome\Application\chrome.exe&quot; --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/zhongxia245/blog/issues/28" target="_blank" rel="noopener">Chrome 跨域 disable-web-security 关闭安全策略</a></p>
+<p>文章参考摘录来源：<br><a href="https://github.com/wengjq/Blog/issues/2" target="_blank" rel="noopener">前端跨域问题及解决方案</a><br>路易斯-<a href="http://louiszhai.github.io/2016/01/11/cross-domain/" target="_blank" rel="noopener">《由同源策略到前端跨域》</a><br>路易斯-<a href="http://louiszhai.github.io/2016/11/02/ajax" target="_blank" rel="noopener">《ajax知识大梳理》</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/08/JS-同源策略到前端跨域/" data-id="cjfmpdxfp0013wkjijwfa6pv2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-一些常用的JS方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/JS-一些常用的JS方法/" class="article-date">
+  <time datetime="2018-03-05T12:10:40.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/05/JS-一些常用的JS方法/">一些常用的JS方法.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="filter-方法实例"><a href="#filter-方法实例" class="headerlink" title="filter() 方法实例"></a>filter() 方法实例</h3><p>javascript filter() 方法使用指定的函数测试所有元素，并创建一个包含所有通过测试的元素的新数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.filter(callback,[ thisArg])</span><br></pre></td></tr></table></figure>
+<h3 id="indexOf-方法"><a href="#indexOf-方法" class="headerlink" title="indexOf() 方法"></a>indexOf() 方法</h3><p>可返回某个指定的字符串值在字符串中首次出现的位置。<br>语法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringObject.indexOf(searchvalue,fromindex)</span><br></pre></td></tr></table></figure>
+<h3 id="assign-方法"><a href="#assign-方法" class="headerlink" title="assign() 方法"></a>assign() 方法</h3><p>assign() 方法可加载一个新的文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.assign(URL)</span><br></pre></td></tr></table></figure>
+<h3 id="Object-assign-方法"><a href="#Object-assign-方法" class="headerlink" title="Object.assign()方法"></a>Object.assign()方法</h3><p>特点：浅拷贝、对象属性的合并</p>
+<p>var nObj = Object.assign({},obj,obj1);//花括号叫目标对象，后面的obj、obj1是源对象。对象合并是指：将源对象里面的属性添加到目标对象中去，若两者的属性名有冲突，后面的将会覆盖前面的</p>
+<h3 id="文件流转BinaryString"><a href="#文件流转BinaryString" class="headerlink" title="文件流转BinaryString"></a>文件流转BinaryString</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件流转BinaryString</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">fixdata</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> o = <span class="string">""</span>,</span><br><span class="line">          l = <span class="number">0</span>,</span><br><span class="line">          w = <span class="number">10240</span>;</span><br><span class="line">      <span class="keyword">for</span> (; l &lt; data.byteLength / w; ++l)</span><br><span class="line">          o += <span class="built_in">String</span>.fromCharCode.apply(<span class="literal">null</span>, <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(data.slice(l * w, l * w + w)));</span><br><span class="line">      o += <span class="built_in">String</span>.fromCharCode.apply(<span class="literal">null</span>, <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(data.slice(l * w)));</span><br><span class="line">      <span class="keyword">return</span> o;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="unshift-方法"><a href="#unshift-方法" class="headerlink" title="unshift() 方法"></a>unshift() 方法</h3><p>unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。<br>语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObject.unshift(newelement1,newelement2,....,newelementX)</span><br></pre></td></tr></table></figure>
+<p>参数    描述<br>newelement1    必需。向数组添加的第一个元素。<br>newelement2    可选。向数组添加的第二个元素。<br>newelementX    可选。可添加若干个元素。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/05/JS-一些常用的JS方法/" data-id="cjfmpdxf5000nwkjiqbmmu4o4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-JS引擎" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/JS-JS引擎/" class="article-date">
+  <time datetime="2018-03-05T06:05:40.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/05/JS-JS引擎/">JS引擎-以V8为例.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>同步</strong>：一个进程在执行某个请求的时候，若该请求需要一段时间才能返回信息，那么这个进程将会一直等待下去，直到收到返回信息才继续执行下去。<br><strong>异步</strong>：进程不需要一直等下去，而是继续执行下面的操作，不管其他进程的状态。当有消息返回时系统会通知进程进行处理，这样可以提高执行的效率。<br><strong>进程</strong>：狭义上，就是正在运行的程序的实例。广义上，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统动态执行的基本单元，在传统的操作系统中，进程既是基本的分配单元，也是基本的执行单元。<br><strong>线程</strong>：线程是程序中一个单一的顺序控制流程。进程内一个相对独立的、可调度的执行单元，是系统独立调度和分派CPU的基本单位。指运行中的程序的调度单位。<br><strong>单线程</strong>：单线程在程序执行时，所走的程序路径按照连续顺序排下来，前面的必须处理好，后面的才会执行。单线程就是进程里只有一个线程。<br><strong>多线程</strong>：在单个程序中同时运行多个线程完成不同的工作，称为多线程。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/05/JS-JS引擎/" data-id="cjfmpdxe50001wkjiji50cssv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-JS-deep-clone" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/JS-JS-deep-clone/" class="article-date">
+  <time datetime="2018-03-05T04:05:40.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/05/JS-JS-deep-clone/">JS实现深度复制.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JS深复制是在阿里一面的过程中遇到的，以前都不知道，所以当时一脸懵逼，回来赶紧google，发现邹大大以前写过关于深复制的实现，这里参考他的文章：<a href="http://jerryzou.com/posts/dive-into-deep-clone-in-javascript/" target="_blank" rel="noopener">深入剖析 JavaScript 的深复制</a></p>
+<h3 id="浅复制"><a href="#浅复制" class="headerlink" title="浅复制"></a>浅复制</h3><p>复制的是存在栈内存里面的引用指针，并不是存放在堆内存中的内容，当对一个对象下面的属性值进行修改时，所有的都会变化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 浅复制 **/</span></span><br><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Jack'</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> person2 = person1;</span><br><span class="line">person2.name = <span class="string">"Kai"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name);  <span class="comment">//'Kai'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);  <span class="comment">//'Kai'</span></span><br></pre></td></tr></table></figure>
+<h3 id="深复制"><a href="#深复制" class="headerlink" title="深复制"></a>深复制</h3><p>深复制想实现把对象里面属性值也给复制，当修改复制后的对象某个属性值时，原对象对应的属性值不会被修改。</p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>JSON的全局对象<code>parse</code>和<code>stringify</code>方法。</li>
+<li>jQuery的<code>$.clone()</code> 和 <code>$.extend()</code>方法。</li>
+<li>Underscored的<code>_.clone()</code></li>
+<li>lodash的<code>_.clone()</code> / <code>_.cloneDeep()</code></li>
+<li>邹润阳建议的拥抱未来的深复制方法，直接定义在prototype上面。</li>
+</ol>
+<h4 id="JSON的全局对象parse和stringify方法。"><a href="#JSON的全局对象parse和stringify方法。" class="headerlink" title="JSON的全局对象parse和stringify方法。"></a>JSON的全局对象<code>parse</code>和<code>stringify</code>方法。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">source</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(source));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 深复制 **/</span></span><br><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Jack'</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(person1));</span><br><span class="line">person2.name = <span class="string">"Kai"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name);  <span class="comment">//'Jack'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);  <span class="comment">//'Kai'</span></span><br></pre></td></tr></table></figure>
+<p>上面这种方法好处是非常简单易用,，对于Number, String,Obejct等来说基本实现。但是坏处也显而易见,对于正则表达式类型、函数类型等无法进行深拷贝(而且会直接丢失相应的值)。还有一点不好的地方是它会抛弃对象的constructor，也就是深复制之后，无论这个对象原本的构造函数是什么，在深复制之后都会变成Object。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 深复制 **/</span></span><br><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Jack'</span>,</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">29</span>,</span><br><span class="line">    <span class="string">'fn'</span>:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'fn'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'reg'</span>:<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'e'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(person1));</span><br><span class="line">person2.name = <span class="string">"Kai"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name);  <span class="comment">//'Jack'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);  <span class="comment">//'Kai'</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.fn);    <span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.reg);   <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
+<h4 id="jQuery-Underscored-lodash第三方插件实现"><a href="#jQuery-Underscored-lodash第三方插件实现" class="headerlink" title="jQuery Underscored lodash第三方插件实现"></a>jQuery Underscored lodash第三方插件实现</h4><p>现在不做介绍，以后用的的时候再补充进来</p>
+<h4 id="邹润阳–拥抱未来的深复制方法"><a href="#邹润阳–拥抱未来的深复制方法" class="headerlink" title="邹润阳–拥抱未来的深复制方法"></a>邹润阳–拥抱未来的深复制方法</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/05/JS-JS-deep-clone/" data-id="cjfmpdxea0003wkjip7vzs55q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-Javascript编程风格" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/JS-Javascript编程风格/" class="article-date">
+  <time datetime="2018-03-04T17:15:40.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/05/JS-Javascript编程风格/">Javascript编程风格.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="来源：《Javascript编程风格》"><a href="#来源：《Javascript编程风格》" class="headerlink" title="来源：《Javascript编程风格》"></a>来源：<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" rel="noopener">《Javascript编程风格》</a></h3><h3 id="大括号"><a href="#大括号" class="headerlink" title="大括号"></a>大括号</h3><p><strong>规则1：表示区块起首的大括号，不要另起一行。</strong></p>
+<h3 id="圆括号"><a href="#圆括号" class="headerlink" title="圆括号"></a>圆括号</h3><p><strong>规则2：调用函数的时候，函数名与左括号之间没有空格。</strong></p>
+<p><strong>规则3：函数名与参数序列之间，没有空格。</strong></p>
+<p><strong>规则4：所有其他语法元素与左括号之间，都有一个空格。</strong></p>
+<h3 id="分号"><a href="#分号" class="headerlink" title="分号"></a>分号</h3><p><strong>规则5：不要省略句末的分号。</strong></p>
+<h3 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h3><p><strong>规则6：不要使用with语句。</strong></p>
+<h3 id="与"><a href="#与" class="headerlink" title="==与==="></a><code>==</code>与<code>===</code></h3><p><strong>规则7：不要使用”相等”（==）运算符，只使用”严格相等”（===）运算符。</strong></p>
+<h3 id="语句的合并"><a href="#语句的合并" class="headerlink" title="语句的合并"></a>语句的合并</h3><p><strong>规则8：不要将不同目的的语句，合并成一行。尤其是赋值语句。</strong></p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p><strong>规则9：所有变量声明都放在函数的头部。</strong></p>
+<p><strong>规则10：所有函数都在使用之前定义。</strong></p>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p><strong>规则11：避免使用全局变量；如果不得不使用，用大写字母表示变量名，比如UPPER_CASE。</strong></p>
+<h3 id="new命令"><a href="#new命令" class="headerlink" title="new命令"></a>new命令</h3><p><strong>规则12：不要使用new命令，改用</strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener"><strong>Object.create()</strong></a><strong>命令。</strong></p>
+<p><strong>规则13：建构函数的函数名，采用首字母大写（InitialCap）；其他函数名，一律首字母小写。</strong></p>
+<h3 id="自增和自减运算符"><a href="#自增和自减运算符" class="headerlink" title="自增和自减运算符"></a>自增和自减运算符</h3><p><strong>规则14：不要使用自增（++）和自减（–）运算符，用+=和-=代替。</strong></p>
+<h3 id="区块"><a href="#区块" class="headerlink" title="区块"></a><strong>区块</strong></h3><p><strong>规则15：总是使用大括号表示区块。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/05/JS-Javascript编程风格/" data-id="cjfmpdxem0008wkji6vze4hwu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-this对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/05/JS-this对象/" class="article-date">
+  <time datetime="2018-02-05T12:09:40.000Z" itemprop="datePublished">2018-02-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/05/JS-this对象/">this对象.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考：阮一峰<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" rel="noopener">《Javascript的this用法》</a></p>
+<p>追梦子《<a href="http://www.cnblogs.com/pssp/p/5216085.html" target="_blank" rel="noopener">彻底理解js中this的指向，不必硬背</a>》</p>
+<h3 id="1、纯粹的函数调用与作为对象方法的调用"><a href="#1、纯粹的函数调用与作为对象方法的调用" class="headerlink" title="1、纯粹的函数调用与作为对象方法的调用"></a>1、<strong>纯粹的函数调用与作为对象方法的调用</strong></h3><p><strong>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁</strong>，<strong>实际上this的最终指向的是那个调用它的对象。</strong>这句话并不完全对，但是大多数时候可以用这种方法去判断this指向。</p>
+<p>一般情况下，this指向全局对象window，因为是全局window调用</p>
+<p>这里的<code>a()</code>是由<code>window.a()</code>调用的，所以<code>this</code>指向<code>window</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> user = <span class="string">"追梦子"</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user); <span class="comment">//undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+<p>通过其他对象调用，this指向调用对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    user:<span class="string">"追梦子"</span>,</span><br><span class="line">    fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//追梦子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.fn();</span><br></pre></td></tr></table></figure>
+<p>这里 <code>fn()</code>中的this由对象o调用，则this指向对象o。</p>
+<p>如有多层对象，this指向它上一级的对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    a:<span class="number">10</span>,</span><br><span class="line">    b:&#123;</span><br><span class="line">        <span class="comment">// a:12,</span></span><br><span class="line">        fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.a); <span class="comment">//undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
+<p>此时this指向上一级队形b而不是指向对象o。</p>
+<p>总结起来三种情况：</p>
+<p>情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题，你想了解可以自行上网查找。</p>
+<p>情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<p>情况3：如果一个函数中有this，<strong>这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</strong></p>
+<p>一个特殊的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    a:<span class="number">10</span>,</span><br><span class="line">    b:&#123;</span><br><span class="line">        a:<span class="number">12</span>,</span><br><span class="line">        fn:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.a); <span class="comment">//undefined</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//window</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> j = o.b.fn;</span><br><span class="line">j();</span><br></pre></td></tr></table></figure>
+<p>这里的this并没有指向对象b，而是window，因为最后的调用是<code>window.j()。</code></p>
+<p>作为纯粹的函数调用其实就是window调用，其this对象指向window，改变的欧式全局属性</p>
+<p>作为对象方法调用，this就指向这个上级对象。</p>
+<h3 id="2、构造函数中的this"><a href="#2、构造函数中的this" class="headerlink" title="2、构造函数中的this"></a>2、构造函数中的this</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">"追梦子"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<p>这里这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了<strong>new关键字就是创建一个对象实例</strong>，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象a中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
+<p>为什么this会指向a？首先new关键字会创建一个空的对象，然后会自动调用一个函数apply方法，将this指向这个空对象，这样的话函数内部的this就会被这个空的对象替代</p>
+<h4 id="3、使用apply-call-bind-改变this指向"><a href="#3、使用apply-call-bind-改变this指向" class="headerlink" title="3、使用apply() call() bind() 改变this指向"></a>3、使用apply() call() bind() 改变this指向</h4><p>掌握三种方法的用法，了解三种方法的区别即可<br>call传递的是单个参数：<code>call(this,arg1,arg2,arg3...)</code><br>apply可以传递的是一个数组: <code>apply(this,arguments[])</code><br>bind只传递一个对象:<code>bind(this)</code></p>
+<h2 id="几种特殊的情况"><a href="#几种特殊的情况" class="headerlink" title="几种特殊的情况"></a>几种特殊的情况</h2><h4 id="1、当this遇到return时"><a href="#1、当this遇到return时" class="headerlink" title="1、当this遇到return时"></a>1、当this遇到return时</h4><p><strong>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例</strong></p>
+<p>请看例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;  </span><br><span class="line">    <span class="comment">//或者 </span></span><br><span class="line">    <span class="comment">//return function()&#123;&#125;;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//或者undefined </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<p>又一个特殊的情况</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.user = <span class="string">'追梦子'</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;  </span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">//追梦子</span></span><br></pre></td></tr></table></figure>
+<p>null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p>
+<h4 id="2、闭包中的this对象"><a href="#2、闭包中的this对象" class="headerlink" title="2、闭包中的this对象"></a>2、闭包中的this对象</h4><p>闭包的执行环境具有全局性，所以在闭包中，this一般指向window</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/02/05/JS-this对象/" data-id="cjfmpdxf9000rwkji6lyw9rwh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-String对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/05/JS-String对象/" class="article-date">
+  <time datetime="2018-01-05T12:08:40.000Z" itemprop="datePublished">2018-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/JS-String对象/">String对象.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript-String对象"><a href="#JavaScript-String对象" class="headerlink" title="JavaScript  String对象"></a>JavaScript  String对象</h1><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://louiszhai.github.io/2016/01/12/js.String/" target="_blank" rel="noopener">JavaScript字符串所有API全解密</a></p>
+<h3 id="String-对象属性"><a href="#String-对象属性" class="headerlink" title="String 对象属性"></a>String 对象属性</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-constructor-string.html" target="_blank" rel="noopener">constructor</a></td>
+<td style="text-align:left">对创建该对象的函数的引用</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-length-string.html" target="_blank" rel="noopener">length</a></td>
+<td style="text-align:left">字符串的长度</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-prototype-string.html" target="_blank" rel="noopener">prototype</a></td>
+<td style="text-align:left">允许您向对象添加属性和方法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="String-对象方法"><a href="#String-对象方法" class="headerlink" title="String 对象方法"></a>String 对象方法</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-charat.html" target="_blank" rel="noopener">charAt()</a></td>
+<td style="text-align:left">返回在指定位置的字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-charcodeat.html" target="_blank" rel="noopener">charCodeAt()</a></td>
+<td style="text-align:left">返回在指定的位置的字符的 Unicode 编码。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-fromcharcode.html" target="_blank" rel="noopener">fromCharCode()</a></td>
+<td style="text-align:left">将 Unicode 编码转为字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-tolowercase.html" target="_blank" rel="noopener">toLowerCase()</a></td>
+<td style="text-align:left">把字符串转换为小写。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-touppercase.html" target="_blank" rel="noopener">toUpperCase()</a></td>
+<td style="text-align:left">把字符串转换为大写。</td>
+</tr>
+<tr>
+<td style="text-align:left">trim()</td>
+<td style="text-align:left">去除字符串两边的空白</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-concat-string.html" target="_blank" rel="noopener">concat()</a></td>
+<td style="text-align:left">连接两个或更多字符串，并返回新的字符串。如果有多个空格，则视为一个</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-indexof.html" target="_blank" rel="noopener">indexOf()</a></td>
+<td style="text-align:left">返回某个指定的字符串值在字符串中首次出现的位置。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-lastindexof.html" target="_blank" rel="noopener">lastIndexOf()</a></td>
+<td style="text-align:left">从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-search.html" target="_blank" rel="noopener"><strong>search()</strong></a></td>
+<td style="text-align:left">查找与正则表达式相匹配的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-match.html" target="_blank" rel="noopener"><strong>match()</strong></a></td>
+<td style="text-align:left">查找找到一个或多个正则表达式的匹配。这个蛮有用</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-replace.html" target="_blank" rel="noopener"><strong>replace()</strong></a></td>
+<td style="text-align:left">在字符串中查找匹配的子串， 并替换与正则表达式匹配的子串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-split.html" target="_blank" rel="noopener"><strong>split()</strong></a></td>
+<td style="text-align:left">把字符串分割为字符串数组。<strong>注意参数为负的情况</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-slice-string.html" target="_blank" rel="noopener">slice(start,end)</a></td>
+<td style="text-align:left">提取字符串的片断，并在新的字符串中返回被提取的部分。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-substr.html" target="_blank" rel="noopener">substr(start,length)</a></td>
+<td style="text-align:left">从起始索引号提取字符串中指定数目的字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-substring.html" target="_blank" rel="noopener">substring(from , to)</a></td>
+<td style="text-align:left">提取字符串中两个指定的索引号之间的字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-valueof-string.html" target="_blank" rel="noopener">valueOf()</a></td>
+<td style="text-align:left">返回某个字符串对象的原始值。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="String-HTML-包装方法"><a href="#String-HTML-包装方法" class="headerlink" title="String HTML 包装方法"></a>String HTML 包装方法</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-anchor.html" target="_blank" rel="noopener">anchor()</a></td>
+<td style="text-align:left">创建 HTML 锚。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-big.html" target="_blank" rel="noopener">big()</a></td>
+<td style="text-align:left">用大号字体显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-blink.html" target="_blank" rel="noopener">blink()</a></td>
+<td style="text-align:left">显示闪动字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-bold.html" target="_blank" rel="noopener">bold()</a></td>
+<td style="text-align:left">使用粗体显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-fixed.html" target="_blank" rel="noopener">fixed()</a></td>
+<td style="text-align:left">以打字机文本显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-fontcolor.html" target="_blank" rel="noopener">fontcolor()</a></td>
+<td style="text-align:left">使用指定的颜色来显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-fontsize.html" target="_blank" rel="noopener">fontsize()</a></td>
+<td style="text-align:left">使用指定的尺寸来显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-italics.html" target="_blank" rel="noopener">italics()</a></td>
+<td style="text-align:left">使用斜体显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-link.html" target="_blank" rel="noopener">link()</a></td>
+<td style="text-align:left">将字符串显示为链接。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-small.html" target="_blank" rel="noopener">small()</a></td>
+<td style="text-align:left">使用小字号来显示字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-strike.html" target="_blank" rel="noopener">strike()</a></td>
+<td style="text-align:left">用于显示加删除线的字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-sub.html" target="_blank" rel="noopener">sub()</a></td>
+<td style="text-align:left">把字符串显示为下标。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.runoob.com/jsref/jsref-sup.html" target="_blank" rel="noopener">sup()</a></td>
+<td style="text-align:left">把字符串显示为上标。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="charAt"><a href="#charAt" class="headerlink" title="charAt"></a>charAt</h4><p>charAt() 方法返回字符串中指定位置的字符。</p>
+<p>语法：<code>str.charAt(index)</code> index 为字符串索引（取值从0至length-1），如果超出该范围，则返回空串。</p>
+<h4 id="charCodeAt"><a href="#charCodeAt" class="headerlink" title="charCodeAt"></a>charCodeAt</h4><p>charCodeAt() 返回指定索引处字符的 Unicode 数值。</p>
+<p>语法：<code>str.charCodeAt(index)</code>。index 为一个从0至length-1的整数。如果不是一个数值，则默认为 0，如果小于0或者大于字符串长度，则返回 NaN。</p>
+<h4 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h4><p>concat() 方法将一个或多个字符串拼接在一起，组成新的字符串并返回。</p>
+<p>语法：<code>str.concat(string2, string3, …)</code>. concat 的性能表现不佳，强烈推荐使用赋值操作符（+或+=）代替 concat</p>
+<h4 id="indexOf-lastIndexOf"><a href="#indexOf-lastIndexOf" class="headerlink" title="indexOf / lastIndexOf"></a>indexOf / lastIndexOf</h4><p>indexOf() 方法用于查找子字符串在字符串中首次出现的位置，没有则返回 -1。lastIndexOf 则从右往左查找，其它与前者一致</p>
+<p>语法：<code>str.indexOf(searchValue [, fromIndex=0])，str.lastIndexOf(searchValue [, fromIndex=0])</code></p>
+<h4 id="localeCompare"><a href="#localeCompare" class="headerlink" title="localeCompare"></a>localeCompare</h4><p>localeCompare() 方法用来比较字符串，如果指定字符串在原字符串的前面则返回负数，否则返回正数或0，其中0 表示两个字符串相同</p>
+<h4 id="match"><a href="#match" class="headerlink" title="match"></a>match</h4><p>match() 方法用于测试字符串是否支持指定正则表达式的规则，即使传入的是非正则表达式对象，它也会隐式地使用new RegExp(obj)将其转换为正则表达式对象。</p>
+<p>语法：<code>str.match(regexp)</code>.该方法返回包含匹配结果的数组，如果没有匹配项，则返回 null。</p>
+<ul>
+<li>若正则表达式没有 g 标志，则返回同 RegExp.exec(str) 相同的结果。而且返回的数组拥有一个额外的 input 属性，该属性包含原始字符串，另外该数组还拥有一个 index 属性，该属性表示匹配字符串在原字符串中索引（从0开始）。</li>
+<li>若正则表达式包含 g 标志，则该方法返回一个包含所有匹配结果的数组，没有匹配到则返回 null。</li>
+</ul>
+<h4 id="replace-使用最多的方法"><a href="#replace-使用最多的方法" class="headerlink" title="replace 使用最多的方法"></a>replace 使用最多的方法</h4><p>该方法并不改变调用它的字符串本身，而只是返回替换后的字符串.</p>
+<p>语法： <code>str.replace( regexp | substr, newSubStr | function[, flags] )</code></p>
+<p>简单概括,replace拥有两个参数,第一个是需要替换的字符串或者正则表达式;<br>第二个是新的字符串或者一个function,这样参数便有四种组合.</p>
+<ul>
+<li>regexp: 一个 RegExp 对象. 该正则所匹配的内容会被第二个参数的返回值替换掉。</li>
+<li>substr: 一个要被 newSubStr 替换的字符串.</li>
+<li>newSubStr: 替换掉第一个参数在原字符串中的匹配部分. 该字符串中可以内插一些特殊的变量名.</li>
+<li>function: 一个用来创建新子字符串的函数, 该函数的返回值将替换掉第一个参数匹配到的结果. 该函数的参数描述请参考 指定一个函数作为参数 小节.</li>
+<li>flags: 注意：flags 参数在 v8 内核（Chrome and NodeJs）中不起作用. 方法中使用 flags 参数不是符合标准的并且不赞成这样做.</li>
+</ul>
+<h4 id="search"><a href="#search" class="headerlink" title="search"></a>search</h4><p>search() 方法用于测试字符串对象是否包含某个正则匹配，相当于正则表达式的 test 方法，且该方法比 match() 方法更快。如果匹配成功，search() 返回正则表达式在字符串中首次匹配项的索引，否则返回-1。</p>
+<p>语法：<code>str.search(regexp)</code></p>
+<h4 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h4><p>slice() 方法提取字符串的一部分，并返回新的字符串。该方法有些类似 Array.prototype.slice 方法。</p>
+<p>语法：<code>str.slice(start, end)</code></p>
+<h4 id="split"><a href="#split" class="headerlink" title="split"></a>split</h4><p>split() 方法把原字符串分割成子字符串组成数组，并返回该<strong>数组</strong>。</p>
+<p>语法：<code>str.split(separator, limit)</code></p>
+<p>两个参数均是可选的，其中 separator 表示分隔符，它可以是字符串也可以是正则表达式。如果忽略 separator，则返回的数组包含一个由原字符串组成的元素。如果 separator 是一个空串，则 str 将会被分割成一个由原字符串中字符组成的数组。limit 表示从返回的数组中截取前 limit 个元素，从而限定返回的数组长度。</p>
+<h4 id="substr"><a href="#substr" class="headerlink" title="substr"></a>substr</h4><p>substr() 方法返回字符串指定位置开始的指定数量的字符。</p>
+<p>语法：<code>str.substr(start[, length])</code></p>
+<h4 id="subString"><a href="#subString" class="headerlink" title="subString"></a>subString</h4><p>substring() 方法返回字符串两个索引之间的子串。</p>
+<p>语法：<code>str.substring(indexA[, indexB])</code><br>indexA、indexB 表示字符串索引，其中 indexB 可选，如果省略，则表示返回从 indexA 到字符串末尾的子串。</p>
+<ul>
+<li>若 indexA == indexB，则返回一个空字符串；</li>
+<li>若 省略 indexB，则提取字符一直到字符串末尾；</li>
+<li>若 任一参数小于 0 或 NaN，则被当作 0；</li>
+<li>若 任一参数大于 length，则被当作 length。</li>
+<li>如果 indexA &gt; indexB，则 substring 的执行效果就像是两个参数调换一般</li>
+</ul>
+<h4 id="toLocaleLowerCase、toLocaleUpperCase"><a href="#toLocaleLowerCase、toLocaleUpperCase" class="headerlink" title="toLocaleLowerCase、toLocaleUpperCase"></a>toLocaleLowerCase、toLocaleUpperCase</h4><p>toLocaleLowerCase() 方法返回调用该方法的字符串被转换成小写的值，转换规则根据本地化的大小写映射。而toLocaleUpperCase() 方法则是转换成大写的值。</p>
+<h4 id="toLowerCase-、toUpperCase"><a href="#toLowerCase-、toUpperCase" class="headerlink" title="toLowerCase 、toUpperCase"></a>toLowerCase 、toUpperCase</h4><p>这两个方法分别表示将字符串转换为相应的小写，大写形式，并返回</p>
+<h4 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h4><p>trim() 方法清除字符串首尾的空白并返回。</p>
+<h4 id="includes-ES6"><a href="#includes-ES6" class="headerlink" title="includes(ES6)"></a>includes(ES6)</h4><p>includes() 方法基于ECMAScript 2015（ES6）规范，它用来判断一个字符串是否属于另一个字符。如果是，则返回true，否则返回false。<br>语法：<code>str.includes(subString [, position])</code></p>
+<h4 id="endsWith-ES6-、startsWith-ES6"><a href="#endsWith-ES6-、startsWith-ES6" class="headerlink" title="endsWith(ES6) 、startsWith(ES6)"></a>endsWith(ES6) 、startsWith(ES6)</h4><p>endsWith() 方法基于ECMAScript 2015（ES6）规范，它基本与 contains() 功能相同，不同的是，它用来判断一个字符串是否是原字符串的结尾。若是则返回true，否则返回false。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>substr 和 substring，都是两个参数，作用基本相同，两者第一个参数含义相同，但用法不同，前者可为负数，后者值为负数或者非整数时将隐式转换为0。前者第二个参数表示截取字符串的长度，后者第二个参数表示截取字符串的下标；同时substring第一个参数大于第二个参数时，执行结果同位置调换后的结果。</li>
+<li>search方法与indexOf方法作用基本一致，都是查询到了就返回子串第一次出现的下标，否则返回-1，唯一的区别就在于search默认会将子串转化为正则表达式形式，而indexOf不做此处理，也不能处理正则。</li>
+</ul>
+<h3 id="字符串对象遍历"><a href="#字符串对象遍历" class="headerlink" title="字符串对象遍历"></a>字符串对象遍历</h3><p>参照<a href="/JS/遍历.md">各种遍历方法以及使用对象</a></p>
+<h3 id="字符串回文"><a href="#字符串回文" class="headerlink" title="字符串回文"></a>字符串回文</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/05/JS-String对象/" data-id="cjfmpdxey000hwkjir7qgi2x3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-Number对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/05/JS-Number对象/" class="article-date">
+  <time datetime="2018-01-05T08:05:40.000Z" itemprop="datePublished">2018-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/JS-Number对象/">Number对象属性及对象方法.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/assets/import3.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/05/JS-Number对象/" data-id="cjfmpdxer000dwkji4ligc7zp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-Math对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/05/JS-Math对象/" class="article-date">
+  <time datetime="2018-01-05T07:05:40.000Z" itemprop="datePublished">2018-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/JS-Math对象/">Math对象属性及对象方法.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Math对象属性及对象方法"><a href="#Math对象属性及对象方法" class="headerlink" title="Math对象属性及对象方法"></a>Math对象属性及对象方法</h2><p><a href="http://www.runoob.com/jsref/jsref-obj-math.html" target="_blank" rel="noopener">API参考菜鸟教程</a></p>
+<h3 id="Math对象属性"><a href="#Math对象属性" class="headerlink" title="Math对象属性"></a>Math对象属性</h3><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.Attributes</span><br></pre></td></tr></table></figure>
+<p><img src="/assets/import1.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-e.html" target="_blank" rel="noopener">E</a></th>
+<th style="text-align:left">返回算术常量 e，即自然对数的底数（约等于2.718）。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-ln2.html" target="_blank" rel="noopener">LN2</a></td>
+<td style="text-align:left">返回 2 的自然对数（约等于0.693）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-ln10.html" target="_blank" rel="noopener">LN10</a></td>
+<td style="text-align:left">返回 10 的自然对数（约等于2.302）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-log2e.html" target="_blank" rel="noopener">LOG2E</a></td>
+<td style="text-align:left">返回以 2 为底的 e 的对数（约等于 1.414）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-log10e.html" target="_blank" rel="noopener">LOG10E</a></td>
+<td style="text-align:left">返回以 10 为底的 e 的对数（约等于0.434）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-pi.html" target="_blank" rel="noopener">PI</a></td>
+<td style="text-align:left">返回圆周率（约等于3.14159）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-sqrt1-2.html" target="_blank" rel="noopener">SQRT1_2</a></td>
+<td style="text-align:left">返回返回 2 的平方根的倒数（约等于 0.707）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-sqrt2.html" target="_blank" rel="noopener">SQRT2</a></td>
+<td style="text-align:left">返回 2 的平方根（约等于 1.414）。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Math-对象方法"><a href="#Math-对象方法" class="headerlink" title="Math 对象方法"></a>Math 对象方法</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-acos.html" target="_blank" rel="noopener">acos(x)</a></td>
+<td style="text-align:left">返回 x 的反余弦值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-asin.html" target="_blank" rel="noopener">asin(x)</a></td>
+<td style="text-align:left">返回 x 的反正弦值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-atan.html" target="_blank" rel="noopener">atan(x)</a></td>
+<td style="text-align:left">以介于 -PI/2 与 PI/2 弧度之间的数值来返回 x 的反正切值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-atan2.html" target="_blank" rel="noopener">atan2(y,x)</a></td>
+<td style="text-align:left">返回从 x 轴到点 (x,y) 的角度（介于 -PI/2 与 PI/2 弧度之间）。注意y在前，x在后</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-cos.html" target="_blank" rel="noopener">cos(x)</a></td>
+<td style="text-align:left">返回数的余弦。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-sin.html" target="_blank" rel="noopener">sin(x)</a></td>
+<td style="text-align:left">返回数的正弦。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-tan.html" target="_blank" rel="noopener">tan(x)</a></td>
+<td style="text-align:left">返回角的正切。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-ceil.html" target="_blank" rel="noopener">ceil(x)</a></td>
+<td style="text-align:left">对数进行上舍入。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-floor.html" target="_blank" rel="noopener">floor(x)</a></td>
+<td style="text-align:left">对 x 进行下舍入。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-max.html" target="_blank" rel="noopener">max(x,y,z,…,n)</a></td>
+<td style="text-align:left">返回 x,y,z,…,n 中的最高值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-min.html" target="_blank" rel="noopener">min(x,y,z,…,n)</a></td>
+<td style="text-align:left">返回 x,y,z,…,n中的最低值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-random.html" target="_blank" rel="noopener">random()</a></td>
+<td style="text-align:left">返回 0 ~ 1 之间的随机数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-round.html" target="_blank" rel="noopener">round(x)</a></td>
+<td style="text-align:left">把数四舍五入为最接近的整数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-abs.html" target="_blank" rel="noopener">abs(x)</a></td>
+<td style="text-align:left">返回 x 的绝对值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-exp.html" target="_blank" rel="noopener">exp(x)</a></td>
+<td style="text-align:left">返回 E的x次幂指数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-log.html" target="_blank" rel="noopener">log(x)</a></td>
+<td style="text-align:left">返回数的自然对数（底为e）。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-pow.html" target="_blank" rel="noopener">pow(x,y)</a></td>
+<td style="text-align:left">返回 x 的 y 次幂。</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.runoob.com/jsref/jsref-sqrt.html" target="_blank" rel="noopener">sqrt(x)</a></td>
+<td style="text-align:left">返回数的平方根。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/05/JS-Math对象/" data-id="cjfmpdxeo000awkjiab1ruqfg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-js从原型到原型链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/05/JS-js从原型到原型链/" class="article-date">
+  <time datetime="2018-01-05T05:05:40.000Z" itemprop="datePublished">2018-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/JS-js从原型到原型链/">深入理解原型到原型链.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="深入理解原型到原型链"><a href="#深入理解原型到原型链" class="headerlink" title="深入理解原型到原型链"></a>深入理解原型到原型链</h2><p>说到原型，肯定离不开对象，在JS中，关于原型对象，javaScript高级程序设计中写道：</p>
+<blockquote>
+<p>我们创建的每一个函数都有一个prototype属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。</p>
+</blockquote>
+<p><img src="/assets/prototype.png" alt=""></p>
+<p>上述 图述的代码如下所示，创建一个构造函数，为此构造函数添加prototype属性，person1,person2对象是Person的实例，Person上面的属性和方法共享。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.name = <span class="string">'Nicholas'</span>;</span><br><span class="line">Person.prototype.age=<span class="number">29</span>;</span><br><span class="line">Person.prototype.job=<span class="string">"Software Engineer"</span>;</span><br><span class="line">Person.prototype.syaName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name===person2.name) <span class="comment">// true</span></span><br><span class="line"><span class="comment">//此时执行两次搜索</span></span><br><span class="line">person1.sysName();  <span class="comment">//"Nicholas"</span></span><br></pre></td></tr></table></figure>
+<h2 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h2><p>函数的 prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的<strong>实例</strong>的原型，也就是这个例子中的 person1 和 person2 的原型。</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a><img src="https://raw.githubusercontent.com/mqyqingfeng/Blog/master/Images/prototype1.png" alt=""></h4><h2 id="proto"><a href="#proto" class="headerlink" title="__proto__"></a>__proto__</h2><p>这是每一个JavaScript对象(除了 null )都具有的一个属性，叫__proto__，这个属性会指向该对象的原型。</p>
+<p>为了证明这一点,我们测试：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.__proto__ === Person.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>于是我们更新下关系图：</p>
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="https://raw.githubusercontent.com/mqyqingfeng/Blog/master/Images/prototype2.png" alt=""></h4><p>既然实例对象和构造函数都可以指向原型，那么原型是否有属性指向构造函数或者实例呢？</p>
+<h2 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h2><p>指向实例倒是没有，因为一个构造函数可以生成多个实例，但是原型指向构造函数倒是有的，这就要讲到第三个属性：constructor，每个原型都有一个 constructor 属性指向关联的构造函数。</p>
+<p>为了验证这一点，我们可以尝试：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Person === Person.prototype.constructor); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>此时我们更新关系图：</p>
+<h4 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="https://raw.githubusercontent.com/mqyqingfeng/Blog/master/Images/prototype3.png" alt=""></h4><h2 id="实例与原型"><a href="#实例与原型" class="headerlink" title="实例与原型"></a>实例与原型</h2><p>我们在读取对象属性的时候，要注意搜索顺序，</p>
+<p><img src="/assets/proto.png" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.name = <span class="string">'Nicholas'</span>;</span><br><span class="line">Person.prototype.age=<span class="number">29</span>;</span><br><span class="line">Person.prototype.job=<span class="string">"Software Engineer"</span>;</span><br><span class="line">Person.prototype.syaName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">person1.name=<span class="string">'Mack'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person1.name) <span class="comment">// Mack</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name) <span class="comment">// Nicholas</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//此时执行两次搜索</span></span><br><span class="line">person1.sysName();  <span class="comment">//"Mack"</span></span><br></pre></td></tr></table></figure>
+<h2 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h2><p>在前面，我们已经讲了原型也是一个对象，既然是对象，我们就可以用最原始的方式创建它，那就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj = new Object();</span><br><span class="line">obj.name = &apos;Kevin&apos;</span><br><span class="line">console.log(obj.name) // Kevin</span><br></pre></td></tr></table></figure>
+<p>其实原型对象就是通过 Object 构造函数生成的，结合之前所讲，实例的 __proto__ 指向构造函数的 prototype ，所以我们再更新下关系图：</p>
+<p><img src="https://raw.githubusercontent.com/mqyqingfeng/Blog/master/Images/prototype4.png" alt=""></p>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>在 ECMAScript 中，每个由构造器创建的对象拥有一个指向构造器 prototype 属性值的 隐式引用（implicit reference），这个引用称之为 原型（prototype）。进一步，每个原型可以拥有指向自己原型的 隐式引用（即该原型的原型），如此下去，这就是所谓的 原型链（prototype chain）<br>可以在浏览器控制台下一直打印自己的原型，返回的都是一样的。</p>
+<p>在javaScripts高级程序设计中，关于原型链是这么定义的：</p>
+<p><img src="/assets/chain1.png" alt=""></p>
+<p>下面我们看一下书上实现原型链的一个例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//继承了SuperType</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSubValue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line"><span class="built_in">console</span>.log(instance.getSuperValue());</span><br><span class="line"><span class="built_in">console</span>.log(instance.getSubValue());</span><br></pre></td></tr></table></figure>
+<p>例子定义了两个类型：SuperType和SubType，每个类型分别有一个属性和一个方法。它们的主要区别是 SubType 继承了 SuperType ，而继承是通过创建 SuperType 的实例，并将该实例赋给SubType.prototype 实现的。实现的本质是重写原型对象，代之以一个新类型的实例。换句话说，原来存在于 SuperType 的实例中的所有属性和方法，现在也存在于 SubType.prototype 中了。在确立了继承关系之后，我们给 SubType.prototype 添加了一个方法，这样就在继承了 SuperType 的属性和方法的基础上又添加了一个新方法。</p>
+<p>关系图如下所示：</p>
+<p><img src="/assets/chain2.png" alt=""><br>实际上，所有的引用类型默认都继承了Object，这个继承也是通过原型链实现的。记住，所有函数的默认原型都是Object的实例，因此默认原型都会包含一个内部指针，指向Object.peototype。所以完整的关系如下所示：</p>
+<p><img src="/assets/chain3.png" alt=""></p>
+<p>关于理解js中原型与原型链，其实主要记住这张图就好了，对象的原型属性指向原型对象，原型对象中又有一个属性constructor又指向这个对象，因为这层关系的存在，所以，才会有原型链，进而有继承，正向来说，因为js语言中要设计继承属性，所以才会设计有这么一层关系，都知道js语言设计参考于C++、java等语言，不知道这些语言中关于继承是怎么设计的，但是js的这种设计一开始我看的很迷糊。</p>
+<p>后面再会说一下关于对象原型的一个操作方法</p>
+<h2 id="原型操作"><a href="#原型操作" class="headerlink" title="原型操作"></a>原型操作</h2><h3 id="查看原型"><a href="#查看原型" class="headerlink" title="查看原型"></a>查看原型</h3><p>es5带来了查看对象原型的方法——Object.getPrototypeOf，该方法返回指定对象的原型（也就是该对象内部属性[[Prototype]]的值）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(&#123;&#125;))</span><br><span class="line"><span class="comment">//Object.prototype</span></span><br></pre></td></tr></table></figure>
+<p>es6带来了另一种查看对象原型的方法——Object.prototype.__proto__，一个对象的__proto__ 属性和自己的内部属性[[Prototype]]指向一个相同的值 (通常称这个值为原型),原型的值可以是一个对象值也可以是null(比如说Object.prototype.<strong>proto</strong>的值就是null)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(&#123;&#125;).__proto__</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">Object</span>.prototype</span><br></pre></td></tr></table></figure>
+<h3 id="创建原型的方式"><a href="#创建原型的方式" class="headerlink" title="创建原型的方式"></a>创建原型的方式</h3><p>在下面的例子中我们将对象a的[[Prototype]]指向b。</p>
+<h4 id="使用普通语法创建对象"><a href="#使用普通语法创建对象" class="headerlink" title="使用普通语法创建对象"></a>使用普通语法创建对象</h4><p>这是最容易被大家忽略的方法，在js中你是绕不过原型的，不经意间就创建了原型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="comment">// o ---&gt; Object.prototype ---&gt; null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="comment">// a ---&gt; Array.prototype ---&gt; Object.prototype ---&gt; null</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// f ---&gt; Function.prototype ---&gt; Object.prototype ---&gt; null</span></span><br></pre></td></tr></table></figure>
+<p>这种方法无法让a的[[Prototype]]指向b。</p>
+<h4 id="使用构造器创建对象"><a href="#使用构造器创建对象" class="headerlink" title="使用构造器创建对象"></a>使用构造器创建对象</h4><p>构造函数就是一个普通的函数，只不过这次不是直接调用函数，而是在函数前加上new关键字。</p>
+<p>每个函数都有一个prototype属性，通过new关键字新建的对象的原型会指向构造函数的prototype属性，所以我们可以修改构造函数的prototype属性从而达到操作对象原型的目的。</p>
+<p>为了让b继承a，需要有一个构造函数A</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = &#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">A.prototype = b;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === b;</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="comment">// a ---&gt; A.prototype === b</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用-Object-create-创建对象"><a href="#使用-Object-create-创建对象" class="headerlink" title="使用 Object.create 创建对象"></a>使用 Object.create 创建对象</h4><p>ES5带来了Object.create接口，可以让我们直接设置一个对象原型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> a = <span class="built_in">Object</span>.create(b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === b;</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="comment">// a ---&gt; b</span></span><br></pre></td></tr></table></figure>
+<h4 id="Object-setPrototypeOf"><a href="#Object-setPrototypeOf" class="headerlink" title="Object.setPrototypeOf"></a>Object.setPrototypeOf</h4><p>ES6带来了另一个接口，可以绕过创建对象的过程，直接操作原型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(a, b);</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === b;</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="comment">// a ---&gt; b</span></span><br></pre></td></tr></table></figure>
+<h4 id="proto-1"><a href="#proto-1" class="headerlink" title="proto"></a>proto</h4><p>ES6还带来了一个属性，通过这个属性也可以直接操作原型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">a.__proto__ = b;</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === b;</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="comment">// a ---&gt; b</span></span><br></pre></td></tr></table></figure>
+<p>注意这个属性在ES6规范的附录中，也就意味着不是所有的环境都会有这个属性。</p>
+<h4 id="使用-class-关键字"><a href="#使用-class-关键字" class="headerlink" title="使用 class 关键字"></a>使用 class 关键字</h4><p>ES6引入了以class语法糖，通过extends关键字我们也可以实现继承，但是无法直接操作对象的原型，而是要借助“类”，其实就是构造函数和函数的prototype属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">B</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === A.prototype;</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="comment">// a ---&gt; A.prototype === B的实例</span></span><br></pre></td></tr></table></figure>
+<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><p><a href="https://github.com/mqyqingfeng/Blog/issues/2" target="_blank" rel="noopener">JavaScript深入之从原型到原型链</a></p>
+<p><a href="http://yanhaijing.com/javascript/2016/07/24/prototype-and-inheritance-of-js/" target="_blank" rel="noopener">详解JavaScript中的原型和继承</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/web/1304_zengyz_jsoo/" target="_blank" rel="noopener">全面理解面向对象的 JavaScript</a></p>
+<p>《高程》</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/05/JS-js从原型到原型链/" data-id="cjfmpdxf3000lwkji5yjysseq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 10px;">JS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-闭包/">JavaScript闭包.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
