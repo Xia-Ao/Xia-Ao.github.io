@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md | 夏夏盟主</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通常我们在够买vps的时候，或者第一次配置ssh登录的时候，就会将本机的ssh公钥添加的云平台上去，在初始化vps时，云平台会将添加的ssh公钥添加到用户的/user/.ssh/authorized_keys文件中，例如，如果用户是root用户，则公钥位于/root/.ssh/authorized_keys文件。这样，在vps中具有你本机的公钥，在本机使用下面命令就可以连接，大多数平台都是这样。1">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/Linux-SSH连接/index.html">
+<meta property="og:site_name" content="夏夏盟主">
+<meta property="og:description" content="通常我们在够买vps的时候，或者第一次配置ssh登录的时候，就会将本机的ssh公钥添加的云平台上去，在初始化vps时，云平台会将添加的ssh公钥添加到用户的/user/.ssh/authorized_keys文件中，例如，如果用户是root用户，则公钥位于/root/.ssh/authorized_keys文件。这样，在vps中具有你本机的公钥，在本机使用下面命令就可以连接，大多数平台都是这样。1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/assets/id_rsa.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/22/assets/id_rsa_9527.png">
+<meta property="og:updated_time" content="2018-04-22T02:32:13.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md">
+<meta name="twitter:description" content="通常我们在够买vps的时候，或者第一次配置ssh登录的时候，就会将本机的ssh公钥添加的云平台上去，在初始化vps时，云平台会将添加的ssh公钥添加到用户的/user/.ssh/authorized_keys文件中，例如，如果用户是root用户，则公钥位于/root/.ssh/authorized_keys文件。这样，在vps中具有你本机的公钥，在本机使用下面命令就可以连接，大多数平台都是这样。1">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/22/assets/id_rsa.png">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏盟主" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏盟主</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-SSH连接" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/Linux-SSH连接/" class="article-date">
+  <time datetime="2018-04-21T18:05:40.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通常我们在够买vps的时候，或者第一次配置ssh登录的时候，就会将本机的ssh公钥添加的云平台上去，在初始化vps时，云平台会将添加的ssh公钥添加到用户的<code>/user/.ssh/authorized_keys</code>文件中，例如，如果用户是root用户，则公钥位于<code>/root/.ssh/authorized_keys</code>文件。这样，在vps中具有你本机的公钥，在本机使用下面命令就可以连接，大多数平台都是这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@yourVpsIp</span><br></pre></td></tr></table></figure></p>
+<p>但是又一次我作死了，由于谷歌云我使用ssh连接的时候用户弄错了，一直提示我没用次用户的公钥，不知道什么原因，我头脑一热，重新生成了本机的ssh公钥密钥，然后将谷歌云的上的公钥删掉，换成新生成的公钥。之久就怎么也连不上去了，以前使用浏览器的ssh连接方式也连不上了。开始了无尽的作死之路。<br><img src="..\assets\id_rsa.png" alt=""></p>
+<p>主要的因为，在vps初始化的时候，将平台的公钥添加的用户的ssh目录下，但是后面如果修改了平台的ssh公钥，vps用户中的<code>authorized_keys</code>并不会同步，只有将<code>authorized_keys</code>内容同步为新的公钥即可。但是谷歌云的话，由于将之前的公钥删除，怎么都连接不上去，都没法操作vps，所以只有重置vps，我选择了关停这台vps，重新购买了一台，将之前的静态IP重新绑定到新的vps。然后顺利连接。</p>
+<p>上面的方法比较极端，下面就来介绍一个不用清空vps的方法。</p>
+<p>由于我重新生成了本机的ssh公钥密钥，所有我的github，coding平台重新添加ssh公钥就可以了，这个和vps不一样，是可以同步的。但是我的digitalOcean服务器就没有那么好的运气了。也遇到了之前谷歌云一样的问题。登录时提示在vps中没有该用户的公钥。</p>
+<p>解决方案：</p>
+<p>1、在digitalOcean平台重新添加新的公钥<br><img src="..\assets\id_rsa_9527.png" alt=""><br>2、使用账号密码通过网页版控制台登录。<br><code>cat /root/.ssh/authorized_keys</code>，发现是之前的ssh公钥，并没有的更新，准备手动修改。但是这个网页版做的很不好，没法复制粘贴命令，所以也没法将公钥贴进去，不可能一个一个手敲吧，然后也不能使用上传。这就比较麻烦了将次，后面想到使用文件下载，将文件传输到vps，替换原文件。一开始准备使用百度网盘链接，但是链接地址也是比较长，手敲也不现实，后面想到使用git下载。<br>3、使用git仓库下载。<br>在本地创建一个<code>authorized_keys</code>文件，将公钥复制粘贴进去，然后创建一个git仓库，将<code>authorized_keys</code>文件上传到仓库。然后再vps中安装git <code>apt-get install git</code>,使用git克隆这个仓库到指定的文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone http://github.com/Xia-Ao/仓库名</span><br></pre></td></tr></table></figure></p>
+<p>这样vps就得到了<code>authorized_keys</code>，将root用户下的文件替换掉就可以了。<br>然后使用<code>ssh root@yourVpsIP</code>登录。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/22/Linux-SSH连接/" data-id="cjga78ega00002sjipunxepvs" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/05/JS-继承/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">JavaScript继承实现的几种方法.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/22/Linux-SSH连接/">本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-Linux下常用命令/">linux命令.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
