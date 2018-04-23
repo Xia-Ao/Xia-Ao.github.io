@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux常用命令.md | 夏夏盟主</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="文件文件夹操作复制 cp  [源文件或目录]  [目标文件或目录] cp /TEST/test1/test01  /TEST/test2 假设复制源文件test1下的test01文件，目标目录为test2  cp -r /TEST/test1/.  /TEST/test2 把test1中的文件夹及文件夹中所有文件复制到test2中   移动 mv [源文件或目录]  [将要移动到的目录] mv">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令.md">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/Linux-Linux下常用命令/index.html">
+<meta property="og:site_name" content="夏夏盟主">
+<meta property="og:description" content="文件文件夹操作复制 cp  [源文件或目录]  [目标文件或目录] cp /TEST/test1/test01  /TEST/test2 假设复制源文件test1下的test01文件，目标目录为test2  cp -r /TEST/test1/.  /TEST/test2 把test1中的文件夹及文件夹中所有文件复制到test2中   移动 mv [源文件或目录]  [将要移动到的目录] mv">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-23T07:23:26.038Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令.md">
+<meta name="twitter:description" content="文件文件夹操作复制 cp  [源文件或目录]  [目标文件或目录] cp /TEST/test1/test01  /TEST/test2 假设复制源文件test1下的test01文件，目标目录为test2  cp -r /TEST/test1/.  /TEST/test2 把test1中的文件夹及文件夹中所有文件复制到test2中   移动 mv [源文件或目录]  [将要移动到的目录] mv">
+  
+    <link rel="alternate" href="/atom.xml" title="夏夏盟主" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">夏夏盟主</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">档案</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-Linux下常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/23/Linux-Linux下常用命令/" class="article-date">
+  <time datetime="2018-04-22T18:05:40.000Z" itemprop="datePublished">2018-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux常用命令.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="文件文件夹操作"><a href="#文件文件夹操作" class="headerlink" title="文件文件夹操作"></a>文件文件夹操作</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><ul>
+<li><code>cp  [源文件或目录]  [目标文件或目录]</code></li>
+<li><p><code>cp /TEST/test1/test01  /TEST/test2</code> 假设复制源文件test1下的test01文件，目标目录为test2</p>
+</li>
+<li><p><code>cp -r /TEST/test1/.  /TEST/test2</code> 把test1中的文件夹及文件夹中所有文件复制到test2中</p>
+</li>
+</ul>
+<h4 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h4><ul>
+<li><code>mv [源文件或目录]  [将要移动到的目录]</code></li>
+<li><code>mv  mongo.conf /etc</code> 将mongo.conf文件移动到<code>/etc</code>目录下</li>
+<li><code>mv -r  /usr/local/mongodb  /etc</code> 将<code>/usr/local</code>路径下的mongodb文件夹移动到<code>/etc</code>目录下</li>
+</ul>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><code>rm file</code> 删除文件</li>
+<li><code>rm -r folder</code>  删除文件夹</li>
+<li><code>rm -f  file</code> 强制删除</li>
+</ul>
+<h4 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h4><ul>
+<li><code>touch file</code> 新建空白文件</li>
+<li><code>mkdir folder</code> 在当前目录下生成a目录</li>
+</ul>
+<h4 id="压缩及解压缩"><a href="#压缩及解压缩" class="headerlink" title="压缩及解压缩"></a>压缩及解压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。</span><br><span class="line"></span><br><span class="line">下面的参数是根据需要在压缩或解压档案时可选的。</span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br><span class="line"></span><br><span class="line">参数-f是必须的</span><br><span class="line">-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>tar --cvf jpg.tar *.jpg</code> //将目录里所有jpg文件打包成tar.jpg</li>
+<li><code>tar --czf jpg.tar.gz *.jpg</code> //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz</li>
+<li><code>tar --cjf jpg.tar.bz2 *.jpg</code> //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2</li>
+<li><code>tar --cZf jpg.tar.Z *.jpg</code> //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z</li>
+</ul>
+<ul>
+<li><code>tar --xvf file.tar</code> //解压 tar包</li>
+<li><code>tar -xzvf file.tar.gz</code> //解压tar.gz</li>
+<li><code>tar -xjvf file.tar.bz2</code> //解压 tar.bz2tar –xZvf file.tar.Z //解压tar.Z</li>
+</ul>
+<ul>
+<li><code>tar -tf aaa.tar.gz</code>在不解压的情况下查看压缩包的内容</li>
+</ul>
+<h4 id="文件读写及权限"><a href="#文件读写及权限" class="headerlink" title="文件读写及权限"></a>文件读写及权限</h4><ul>
+<li><code>vim mongo.conf</code> 编辑文件</li>
+<li><code>q!</code> 不保存退出</li>
+<li><code>qw!</code> 强制保存退出</li>
+<li><code>cat mongo.conf</code>  查看文件内容</li>
+<li><code>ls -l 文件名</code> 查看linux文件的权限</li>
+<li><code>ls -la 文件夹名称（所在目录）</code> 查看linux文件夹的权限</li>
+<li><code>ll</code> 查看当前目录下各文件和目录的属性</li>
+<li><p><code>sudo chmod -（代表类型）×××（所有者）×××（组用户）×××（其他用户） 文件名</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r=4 表示可读取，w=2 表示可写入，x=1 表示可执行</span><br><span class="line">若要rwx属性则4+2+1=7；   </span><br><span class="line">若要rw-属性则4+2=6；   </span><br><span class="line">若要r-x属性则4+1=7。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sudo chmod 777 file</code> 每个人都有读和写以及执行的权限</p>
+</li>
+<li><code></code></li>
+<li><code></code></li>
+</ul>
+<h3 id="端口以及进程状态检查"><a href="#端口以及进程状态检查" class="headerlink" title="端口以及进程状态检查"></a>端口以及进程状态检查</h3><ul>
+<li><code>lsof -i:8080</code> 查看8080端口哪个进程在使用</li>
+<li><code>netstat -apn|grep mongo</code> 查看mongo进程的端口ip使用</li>
+<li><code>ps aux | less</code> : 查看系统中所有进程</li>
+<li><code>netstat -apn|grep a</code> 检查a服务的监听等信息</li>
+<li><code>telnet xxx.xxx.xxx.xxx</code> port 端口测试</li>
+</ul>
+<h3 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h3><ul>
+<li><code>history</code> 查看历史执行命令</li>
+</ul>
+<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><ul>
+<li><code>ctrl+a</code> 光标快速移动到行首</li>
+<li><code>ctrl+e</code> 光标快速移动到行尾</li>
+<li><code>ctrl+u</code> 快速删除光标到行首的命令</li>
+<li><code>ctrl+k</code> 快速删除光标到行尾的命令</li>
+<li><code>按一下Esc，放手在按一次右ctrl</code>，可以调用上次命令的参数</li>
+<li><code>lsb_release -a</code> 查看系统版本</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/23/Linux-Linux下常用命令/" data-id="cjgbxbaj300016gjin9t1rsp9" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/22/Linux-SSH连接/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/">JS</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/23/Linux-Linux下常用命令/">Linux常用命令.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/22/Linux-SSH连接/">本机更换SSH公钥密钥后如何再通过ssh方式登录服务器.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-继承/">JavaScript继承实现的几种方法.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/Linux-README/">readme.md</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/05/JS-AJAX使用详细介绍/">Ajax介绍.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xia Ao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">档案</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
